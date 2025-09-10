@@ -16,6 +16,18 @@ This report analyzes the Billboard Top Ten singles dataset, exploring trends in 
 
 ## Data Loading and Preprocessing
 
+The data was scraped and pre-processed from [Billboard's published Top Ten singles charts](https://en.wikipedia.org/wiki/Lists_of_Billboard_Hot_100_top-ten_singles).
+
+The data was collected using a custom Python scraper, available here: [get_data.py on GitHub](https://github.com/Ghpguy/wiki_popular_music/blob/main/utils/get_data.py).
+
+Preprocessing steps included:
+- Parsing chart dates and normalizing artist names
+- Handling collaborations and featured artists
+- Calculating song entry, peak, and longevity metrics
+- Removing duplicates and correcting known data errors
+The resulting CSV contains columns for song name, artist(s), entry/peak dates, peak position, weeks in top ten, and more.  
+[View the raw CSV on GitHub](https://github.com/Ghpguy/wiki_popular_music/blob/main/data/billboard_data_2025_09.csv)
+
 ```{python}
 import pandas as pd
 import numpy as np
@@ -40,6 +52,18 @@ df.head()
 
 # Song Longevity in the Top Ten
 
+How long do songs last in the Top Ten? Has it changed over time?
+
+```{python}
+print(
+  f"Average weeks in Top Ten (all songs): {df['Weeks in Top Ten'].mean():.2f}"
+)
+print(
+  "Average weeks in Top Ten by decade:\n",
+  df.groupby('Decade')['Weeks in Top Ten'].mean().round(2)
+)
+```
+
 ## Overall Distribution
 
 ```{python}
@@ -55,6 +79,8 @@ fig.show()
 ```
 
 ## By Decade
+
+It seems that by decade the general trend is that songs are lasting longer on the top ten charts. Popular sentiment finds that songs have been lasting longer on the charts, making it harder for newer songs / artists to compete in the space. 
 
 ```{python}
 decade_stats = df.groupby('Decade', as_index=False)['Weeks in Top Ten'].mean()
@@ -82,7 +108,95 @@ fig = px.line(
 fig.show()
 ```
 
+# Survival Analysis
+
+This section applies survival analysis to the Billboard Top Ten singles dataset, using the Kaplan-Meier estimator to model the probability that a song remains in the Top Ten as weeks progress. The survival curve visualizes the likelihood of a song staying in the Top Ten over time, both for all songs and broken down by decade. This helps reveal changes in song longevity and chart dynamics across different eras.
+
+## Survival Curve (All Songs)
+
+```{python}
+kmf = KaplanMeierFitter()
+kmf.fit(df["Weeks in Top Ten"], event_observed=[1]*len(df))
+survival_df = kmf.survival_function_.reset_index()
+survival_df.columns = ["Weeks in Top Ten", "Probability of Staying"]
+fig = px.line(
+  survival_df,
+  x="Weeks in Top Ten",
+  y="Probability of Staying",
+  title="Survival Curve of Billboard Top Ten Singles",
+  labels={"Weeks in Top Ten": "Weeks in Top Ten", "Probability of Staying": "Probability of Staying in Top Ten"}
+)
+fig.show()
+```
+
+## Survival Curves by Decade
+
+```{python}
+fig = go.Figure()
+kmf = KaplanMeierFitter()
+
+# Only unique decades
+decades = sorted(df['Decade'].dropna().unique())
+
+for i, decade in enumerate(decades):
+    group = df[df['Decade'] == decade]
+    if len(group) == 0:
+        continue
+
+    # Fit Kaplan-Meier curve
+    kmf.fit(group["Weeks in Top Ten"], event_observed=[1]*len(group))
+    surv = kmf.survival_function_.reset_index()
+    surv.columns = ["Weeks in Top Ten", "Probability of Staying"]
+
+    # Add survival curve
+    fig.add_trace(
+        go.Scatter(
+            x=surv["Weeks in Top Ten"],
+            y=surv["Probability of Staying"],
+            mode="lines",
+            name=str(decade),
+            line=dict(width=3)
+        )
+    )
+
+    # Automatically pick evenly spaced points along the middle 80% of the curve
+    n_labels = 1
+    start_idx = int(len(surv) * 0.3)   # skip first 10%
+    end_idx = int(len(surv) * 0.95)     # skip last 10%
+    indices = np.linspace(start_idx, end_idx, n_labels, dtype=int)
+
+    for j, idx in enumerate(indices):
+        # stagger labels vertically to reduce overlap
+        y_offset = 15 * (i - len(decades)/2) + 10 * (j - (n_labels-1)/2)
+
+        # Add annotation once per point
+        fig.add_annotation(
+            x=surv["Weeks in Top Ten"].iloc[idx],
+            y=surv["Probability of Staying"].iloc[idx],
+            text=f"{decade}",
+            showarrow=True,
+            arrowhead=2,
+            font=dict(size=12),
+            ax=0,
+            ay=-y_offset
+        )
+
+# Layout
+fig.update_layout(
+    title="Survival Curves of Billboard Top Ten Singles by Decade",
+    xaxis_title="Weeks in Top Ten",
+    yaxis_title="Probability of Staying in Top Ten",
+    yaxis=dict(range=[0, 1]),
+    showlegend=True
+)
+
+fig.show()
+```
+
+
 # Peak Positions
+
+This section explores the distribution and trends of peak chart positions for songs in the Billboard Top Ten. It examines how often songs reach each peak position, and analyzes changes in average peak positions over decades and years. The visualizations help reveal whether songs are more likely to reach higher or lower peaks over time, and provide insight into the competitiveness of the charts across different eras. Overall it seems that peak position competitiveness remains mostly similar.
 
 ## Distribution of Peak Positions
 
@@ -125,61 +239,14 @@ fig = px.line(
 fig.show()
 ```
 
-# Survival Analysis
-
-## Survival Curve (All Songs)
-
-```{python}
-kmf = KaplanMeierFitter()
-kmf.fit(df["Weeks in Top Ten"], event_observed=[1]*len(df))
-survival_df = kmf.survival_function_.reset_index()
-survival_df.columns = ["Weeks in Top Ten", "Probability of Staying"]
-fig = px.line(
-  survival_df,
-  x="Weeks in Top Ten",
-  y="Probability of Staying",
-  title="Survival Curve of Billboard Top Ten Singles",
-  labels={"Weeks in Top Ten": "Weeks in Top Ten", "Probability of Staying": "Probability of Staying in Top Ten"}
-)
-fig.show()
-```
-
-## Survival Curves by Decade
-
-```{python}
-fig = go.Figure()
-decades = sorted(df['Decade'].dropna().unique())
-for decade in decades:
-  group = df[df['Decade'] == decade]
-  if len(group) == 0:
-    continue
-  kmf.fit(group["Weeks in Top Ten"], event_observed=[1]*len(group))
-  surv = kmf.survival_function_.reset_index()
-  surv.columns = ["Weeks in Top Ten", "Probability of Staying"]
-  fig.add_trace(
-    go.Scatter(
-      x=surv["Weeks in Top Ten"],
-      y=surv["Probability of Staying"],
-      mode="lines",
-      name=str(decade),
-      line=dict(width=3)
-    )
-  )
-fig.update_layout(
-  title="Survival Curves of Billboard Top Ten Singles by Decade",
-  xaxis_title="Weeks in Top Ten",
-  yaxis_title="Probability of Staying in Top Ten",
-  yaxis=dict(range=[0, 1]),
-  showlegend=True
-)
-fig.show()
-```
-
 # Longevity by Peak Position
+
+This section examines how the longevity of a song in the Top Ten relates to its peak chart position. By analyzing the average number of weeks songs spend in the Top Ten for each peak position (from #1 to #10), we can see whether songs that reach higher peaks tend to have longer or shorter chart runs. This helps reveal if top-performing songs dominate the charts for longer periods, or if lower-peaking songs can also achieve significant longevity.
 
 ```{python}
 longevity_by_peak = df.groupby("Peak")["Weeks in Top Ten"].mean().reset_index()
 longevity_by_peak = longevity_by_peak.sort_values("Peak")
+longevity_by_peak["Weeks in Top Ten"] = longevity_by_peak["Weeks in Top Ten"].round(1)
 fig = px.bar(
   longevity_by_peak,
   x="Peak",
@@ -192,6 +259,8 @@ fig.show()
 ```
 
 # Number of Entries per Year
+
+This supplemental chart demonstarates the result of songs living longer in the top ten - as a result we are seeing less entries breaking into the top ten and removing older top ten hits.
 
 ```{python}
 entries_per_year = df.groupby("Year")["Single Name"].count().reset_index()
@@ -208,11 +277,14 @@ fig.show()
 
 # Top Artists and One-Hit Wonders
 
+So which artists are we seeing occupy the most real estate on the charts?
+
 ## Top 10 Artists by Top Ten Entries
 
 ```{python}
-top_artists = df["Artist(s)"].value_counts().head(10).reset_index()
+top_artists = df["Artist(s)"].value_counts().reset_index()
 top_artists.columns = ["Artist", "Entries"]
+top_artists = top_artists.sort_values("Entries", ascending=False).head(10)
 fig = px.bar(
   top_artists,
   x="Entries",
@@ -224,7 +296,38 @@ fig = px.bar(
 fig.show()
 ```
 
+## Top 10 Artists by Top Ten Real Estate
+
+This chart shows the top artists by the total amount of weekly space they have occupied on the top ten charts 
+
+```{python}
+# Calculate total weeks in Top Ten for each artist
+artist_real_estate = df.groupby("Artist(s)")["Weeks in Top Ten"].sum().reset_index()
+artist_real_estate = artist_real_estate.sort_values("Weeks in Top Ten", ascending=False).head(10)
+
+# Plot horizontal bar chart
+fig = px.bar(
+    artist_real_estate,
+    x="Weeks in Top Ten",
+    y="Artist(s)",
+    orientation="h",
+    text="Weeks in Top Ten",
+    title="Top 10 Artists by Total Weeks in Top Ten (Chart Real Estate)"
+)
+
+fig.update_traces(textposition="outside")
+fig.update_layout(
+    xaxis_title="Total Weeks in Top Ten",
+    yaxis_title="Artist",
+    yaxis=dict(autorange="reversed")
+)
+
+fig.show()
+```
+
 ## One-Hit Wonders
+
+Which artists make one entry on the top ten charts but never return?
 
 ```{python}
 artist_song_counts = df.groupby("Artist(s)")["Single Name"].nunique()
@@ -233,6 +336,8 @@ print(f"One-hit wonders (Artists that reach the top 10 only once): {one_hit_pct:
 ```
 
 # Seasonality: Top Ten Entries by Month and Decade
+
+Do more songs enter the top ten during certain months compared to other months? (Holiday Songs Excluded) 
 
 ```{python}
 df['Month'] = df['Top Ten Entry Date'].dt.month
@@ -253,6 +358,8 @@ fig.show()
 ```
 
 # Song Trajectory: Lag to Peak
+
+The "Lag to Peak" metric measures the number of days between a song's entry into the Top Ten and the date it reaches its highest chart position. This helps identify songs that quickly shoot to their peak versus those that climb more gradually—so-called "sleeper hits." The distribution below shows that while many songs reach their peak soon after entering the Top Ten, a notable subset takes several weeks or even months to peak, reflecting different promotional strategies, viral trends, or seasonal effects.
 
 ```{python}
 df["Lag to Peak"] = (df["Peak Date"] - df["Top Ten Entry Date"]).dt.days
@@ -306,6 +413,8 @@ fig_longest.show()
 
 # Clustering Song Trajectories
 
+This section uses K-means clustering to group songs based on their chart trajectory characteristics: "Lag to Peak" (how long it took to reach peak position), "Weeks in Top Ten" (overall longevity), and "Peak" (best chart position). By visualizing these clusters, we can identify distinct types of hits, such as instant chart-toppers, slow-burn "sleeper hits," and songs with brief or moderate success. The scatter plot below shows each song colored by its assigned cluster, helping to reveal patterns in how songs move through the Top Ten.
+
 ```{python}
 def clustering_plotly(df, k=4):
   features = df[["Lag to Peak", "Weeks in Top Ten", "Peak"]].dropna()
@@ -344,6 +453,8 @@ fig_cluster2.show()
 ```
 
 # Artist Collaboration Networks by Decade
+
+This section visualizes how artists collaborate within each decade, revealing the most central figures in the collaboration network for each era. For every decade, a network graph is constructed where nodes represent artists and edges indicate collaborations (including features and joint credits). The top 10 most connected artists (by degree centrality) are highlighted, and their collaboration networks are visualized using interactive network diagrams. This helps illustrate how collaboration patterns and key influencers have evolved across decades in popular music.
 
 ```{python}
 frames = []
@@ -413,7 +524,7 @@ fig.show()
 
 # Conclusion
 
-This analysis provides a comprehensive overview of trends in the Billboard Top Ten, including song longevity, peak positions, artist performance, and collaboration networks. Further exploration could include genre-based analysis, deeper clustering, or predictive modeling.
+This analysis provides a comprehensive overview of trends in the Billboard Top Ten, including song longevity, peak positions, artist performance, and collaboration networks. Further exploration could include genre-based analysis, deeper clustering, tests for statistical significance, or predictive modeling.
 
 jupyter: python3
 ---

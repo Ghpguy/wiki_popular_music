@@ -59,4 +59,4 @@ MIT License
 
 ---
 
-_Replace the image above with your own chart or summary visual!_
+

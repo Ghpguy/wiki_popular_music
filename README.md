@@ -1,4 +1,4 @@
-# Billboard Top Ten Analysis (1958 - 2025)
+# [Billboard Top Ten Analysis (1958 - 2025)](https://ghpguy.github.io/wiki_popular_music/quarto.html)
 
 _Author: Paul Harris_
 
@@ -8,7 +8,7 @@ _Author: Paul Harris_
 
 ## Project Overview
 
-This project analyzes the Billboard Hot 100 Top Ten singles from 1958 to 2025. Using data scraped from Wikipedia, it explores trends in song longevity, peak chart positions, artist performance, seasonality, and collaboration networks. The analysis is performed in Python and visualized with Plotly, with a reproducible report generated using Quarto. Take a look!
+This project analyzes the Billboard Hot 100 Top Ten singles from 1958 to 2025. Using data scraped from Wikipedia, it explores trends in song longevity, peak chart positions, artist performance, seasonality, and collaboration networks. The analysis is performed in Python and visualized with Plotly, with a reproducible report generated using Quarto. Take a look at the [full report here](https://ghpguy.github.io/wiki_popular_music/quarto.html).
 
 
 ## Features

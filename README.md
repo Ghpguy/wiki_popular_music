@@ -4,7 +4,7 @@ _Author: Paul Harris_
 
 ---
 
-![Project Welcome](images\billboard-top-10.jpg)
+![Project Welcome](images/billboard-top-10.jpg)
 
 ## Project Overview
 
@@ -52,7 +52,7 @@ pip install -r requirements.txt
 ## Data Source
 - [Wikipedia: Lists of Billboard Hot 100 top-ten singles](https://en.wikipedia.org/wiki/Lists_of_Billboard_Hot_100_top-ten_singles)
 
-![Data Source](images\datasource.png)
+![Data Source](images/datasource.png)
 
 ## License
 MIT License

@@ -166,8 +166,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div id="fe75f734" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
@@ -188,11 +186,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Content-Type"</span>: <span class="st">"application/x-www-form-urlencoded"</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <div id="cfb5f605" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to CSV</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>csv_path <span class="op">=</span> repo_root <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"billboard_data_2025_09.csv"</span></span>
@@ -200,7 +195,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the CSV</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(csv_path)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -282,8 +276,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="f5b82dcc" class="cell" data-execution_count="12">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.post(url, data<span class="op">=</span>payload, headers<span class="op">=</span>headers)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
@@ -292,14 +284,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Access token:"</span>, <span class="st">"redacted_for_security"</span>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Error:"</span>, response.status_code, response.text)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Access token: redacted_for_security</code></pre>
 </div>
 </div>
 <div id="10d62c1e" class="cell" data-execution_count="11">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Search for the track by title + artist</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> search_track(song_title, artist_name):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    search_url <span class="op">=</span> <span class="st">"https://api.spotify.com/v1/search"</span></span>
@@ -338,7 +327,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Artist genres: </span><span class="sc">{</span>genres<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Track not found"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'tracks': {'href': 'https://api.spotify.com/v1/search?offset=0&amp;limit=1&amp;query=track%3AJolene%20artist%3ABeyonce&amp;type=track', 'limit': 1, 'next': 'https://api.spotify.com/v1/search?offset=1&amp;limit=1&amp;query=track%3AJolene%20artist%3ABeyonce&amp;type=track', 'offset': 0, 'previous': None, 'total': 2, 'items': [{'album': {'album_type': 'album', 'artists': [{'external_urls': {'spotify': 'https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m'}, 'href': 'https://api.spotify.com/v1/artists/6vWDO969PvNqNYHIOW5v0m', 'id': '6vWDO969PvNqNYHIOW5v0m', 'name': 'Beyoncé', 'type': 'artist', 'uri': 'spotify:artist:6vWDO969PvNqNYHIOW5v0m'}], 'available_markets': ['AR', 'AU', 'AT', 'BE', 'BO', 'BR', 'BG', 'CA', 'CL', 'CO', 'CR', 'CY', 'CZ', 'DK', 'DO', 'DE', 'EC', 'EE', 'SV', 'FI', 'FR', 'GR', 'GT', 'HN', 'HK', 'HU', 'IS', 'IE', 'IT', 'LV', 'LT', 'LU', 'MY', 'MT', 'MX', 'NL', 'NZ', 'NI', 'NO', 'PA', 'PY', 'PE', 'PH', 'PL', 'PT', 'SG', 'SK', 'ES', 'SE', 'CH', 'TW', 'TR', 'UY', 'US', 'GB', 'AD', 'LI', 'MC', 'ID', 'JP', 'TH', 'VN', 'RO', 'IL', 'ZA', 'SA', 'AE', 'BH', 'QA', 'OM', 'KW', 'EG', 'MA', 'DZ', 'TN', 'LB', 'JO', 'PS', 'IN', 'BY', 'KZ', 'MD', 'UA', 'AL', 'BA', 'HR', 'ME', 'MK', 'RS', 'SI', 'KR', 'BD', 'PK', 'LK', 'GH', 'KE', 'NG', 'TZ', 'UG', 'AG', 'AM', 'BS', 'BB', 'BZ', 'BT', 'BW', 'BF', 'CV', 'CW', 'DM', 'FJ', 'GM', 'GE', 'GD', 'GW', 'GY', 'HT', 'JM', 'KI', 'LS', 'LR', 'MW', 'MV', 'ML', 'MH', 'FM', 'NA', 'NR', 'NE', 'PW', 'PG', 'PR', 'WS', 'SM', 'ST', 'SN', 'SC', 'SL', 'SB', 'KN', 'LC', 'VC', 'SR', 'TL', 'TO', 'TT', 'TV', 'VU', 'AZ', 'BN', 'BI', 'KH', 'CM', 'TD', 'KM', 'GQ', 'SZ', 'GA', 'GN', 'KG', 'LA', 'MO', 'MR', 'MN', 'NP', 'RW', 'TG', 'UZ', 'ZW', 'BJ', 'MG', 'MU', 'MZ', 'AO', 'CI', 'DJ', 'ZM', 'CD', 'CG', 'IQ', 'LY', 'TJ', 'VE', 'ET', 'XK'], 'external_urls': {'spotify': 'https://open.spotify.com/album/6BzxX6zkDsYKFJ04ziU5xQ'}, 'href': 'https://api.spotify.com/v1/albums/6BzxX6zkDsYKFJ04ziU5xQ', 'id': '6BzxX6zkDsYKFJ04ziU5xQ', 'images': [{'height': 640, 'width': 640, 'url': 'https://i.scdn.co/image/ab67616d0000b2731572698fff8a1db257a53599'}, {'height': 300, 'width': 300, 'url': 'https://i.scdn.co/image/ab67616d00001e021572698fff8a1db257a53599'}, {'height': 64, 'width': 64, 'url': 'https://i.scdn.co/image/ab67616d000048511572698fff8a1db257a53599'}], 'is_playable': True, 'name': 'COWBOY CARTER', 'release_date': '2024-03-29', 'release_date_precision': 'day', 'total_tracks': 27, 'type': 'album', 'uri': 'spotify:album:6BzxX6zkDsYKFJ04ziU5xQ'}, 'artists': [{'external_urls': {'spotify': 'https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m'}, 'href': 'https://api.spotify.com/v1/artists/6vWDO969PvNqNYHIOW5v0m', 'id': '6vWDO969PvNqNYHIOW5v0m', 'name': 'Beyoncé', 'type': 'artist', 'uri': 'spotify:artist:6vWDO969PvNqNYHIOW5v0m'}], 'available_markets': ['AR', 'AU', 'AT', 'BE', 'BO', 'BR', 'BG', 'CA', 'CL', 'CO', 'CR', 'CY', 'CZ', 'DK', 'DO', 'DE', 'EC', 'EE', 'SV', 'FI', 'FR', 'GR', 'GT', 'HN', 'HK', 'HU', 'IS', 'IE', 'IT', 'LV', 'LT', 'LU', 'MY', 'MT', 'MX', 'NL', 'NZ', 'NI', 'NO', 'PA', 'PY', 'PE', 'PH', 'PL', 'PT', 'SG', 'SK', 'ES', 'SE', 'CH', 'TW', 'TR', 'UY', 'US', 'GB', 'AD', 'LI', 'MC', 'ID', 'JP', 'TH', 'VN', 'RO', 'IL', 'ZA', 'SA', 'AE', 'BH', 'QA', 'OM', 'KW', 'EG', 'MA', 'DZ', 'TN', 'LB', 'JO', 'PS', 'IN', 'BY', 'KZ', 'MD', 'UA', 'AL', 'BA', 'HR', 'ME', 'MK', 'RS', 'SI', 'KR', 'BD', 'PK', 'LK', 'GH', 'KE', 'NG', 'TZ', 'UG', 'AG', 'AM', 'BS', 'BB', 'BZ', 'BT', 'BW', 'BF', 'CV', 'CW', 'DM', 'FJ', 'GM', 'GE', 'GD', 'GW', 'GY', 'HT', 'JM', 'KI', 'LS', 'LR', 'MW', 'MV', 'ML', 'MH', 'FM', 'NA', 'NR', 'NE', 'PW', 'PG', 'PR', 'WS', 'SM', 'ST', 'SN', 'SC', 'SL', 'SB', 'KN', 'LC', 'VC', 'SR', 'TL', 'TO', 'TT', 'TV', 'VU', 'AZ', 'BN', 'BI', 'KH', 'CM', 'TD', 'KM', 'GQ', 'SZ', 'GA', 'GN', 'KG', 'LA', 'MO', 'MR', 'MN', 'NP', 'RW', 'TG', 'UZ', 'ZW', 'BJ', 'MG', 'MU', 'MZ', 'AO', 'CI', 'DJ', 'ZM', 'CD', 'CG', 'IQ', 'LY', 'TJ', 'VE', 'ET', 'XK'], 'disc_number': 1, 'duration_ms': 189638, 'explicit': False, 'external_ids': {'isrc': 'USSM12402711'}, 'external_urls': {'spotify': 'https://open.spotify.com/track/2PmMh2t7jAtN6cqFooA0Xy'}, 'href': 'https://api.spotify.com/v1/tracks/2PmMh2t7jAtN6cqFooA0Xy', 'id': '2PmMh2t7jAtN6cqFooA0Xy', 'is_local': False, 'is_playable': True, 'name': 'JOLENE', 'popularity': 63, 'preview_url': None, 'track_number': 10, 'type': 'track', 'uri': 'spotify:track:2PmMh2t7jAtN6cqFooA0Xy'}]}}
 {'external_urls': {'spotify': 'https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m'}, 'followers': {'href': None, 'total': 40922681}, 'genres': [], 'href': 'https://api.spotify.com/v1/artists/6vWDO969PvNqNYHIOW5v0m', 'id': '6vWDO969PvNqNYHIOW5v0m', 'images': [{'url': 'https://i.scdn.co/image/ab6761610000e5eb7eaa373538359164b843f7c0', 'height': 640, 'width': 640}, {'url': 'https://i.scdn.co/image/ab676161000051747eaa373538359164b843f7c0', 'height': 320, 'width': 320}, {'url': 'https://i.scdn.co/image/ab6761610000f1787eaa373538359164b843f7c0', 'height': 160, 'width': 160}], 'name': 'Beyoncé', 'popularity': 88, 'type': 'artist', 'uri': 'spotify:artist:6vWDO969PvNqNYHIOW5v0m'}
@@ -347,10 +335,7 @@ Artist genres: []</code></pre>
 </div>
 </div>
 <div id="181758ad" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#after testing, it seems spotify's API is unable to reliably find the genres of songs...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 
 

@@ -166,30 +166,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div id="20f915de" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re </span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> sleep</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <div id="00511a2b" class="cell" data-execution_count="17">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#first we need the master list of all the pages</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://en.wikipedia.org/wiki/Lists_of_Billboard_Hot_100_top-ten_singles"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {<span class="st">"User-Agent"</span>: <span class="st">"Mozilla/5.0"</span>}  <span class="co"># Important to avoid HTTP 403</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url, headers<span class="op">=</span>headers)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>response.raise_for_status()  <span class="co"># Ensure it succeeded</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(response.text, <span class="st">"html.parser"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <div id="c09ca9ed" class="cell" data-execution_count="28">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all relevant Wikipedia URLs for Billboard Hot 100 top-ten singles lists</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>links <span class="op">=</span> soup.find_all(<span class="st">'a'</span>, href<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>billboard_links <span class="op">=</span> [</span>
@@ -202,7 +194,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the found URLs</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> url <span class="kw">in</span> billboard_links:</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2015
 https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1986
@@ -275,25 +266,17 @@ https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1995<
 </div>
 </div>
 <div id="982e4662" class="cell" data-execution_count="29">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"We found </span><span class="sc">{</span><span class="bu">len</span>(billboard_links)<span class="sc">}</span><span class="ss"> URLs."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>We found 68 URLs.</code></pre>
 </div>
 </div>
 <div id="22135b4f" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> requests.get(billboard_links[<span class="dv">0</span>], headers<span class="op">=</span>headers)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>test.raise_for_status()  <span class="co"># Ensure it succeeded</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>soup_test <span class="op">=</span> BeautifulSoup(test.text, <span class="st">"html.parser"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <div id="a8ea1b2c" class="cell" data-execution_count="37">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> data_scraper(urls):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    headers <span class="op">=</span> {<span class="st">"User-Agent"</span>: <span class="st">"Mozilla/5.0"</span>}  <span class="co"># Avoid HTTP 403</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    all_data <span class="op">=</span> []</span>
@@ -397,21 +380,11 @@ https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1995<
 <span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>        sleep(random.uniform(<span class="dv">1</span>, <span class="dv">3</span>))  <span class="co"># sleep between 1 and 3 seconds</span></span>
 <span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.concat(all_data, ignore_index<span class="op">=</span><span class="va">True</span>) <span class="cf">if</span> all_data <span class="cf">else</span> pd.DataFrame()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <div id="d4a99dab" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> data_scraper(billboard_links[:<span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Scraping URL: https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_2025</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:35: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
-  df = pd.read_html(str(table), header=0)[0]
-C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:63: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
-  df["Year"] = df["Year"].ffill()</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Found 2 sentinel rows in this table.
@@ -451,18 +424,8 @@ Found 0 sentinel rows in this table.
 3                 2  None  1958  
 4                 5  None  1958  </code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:35: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
-  df = pd.read_html(str(table), header=0)[0]</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Scraping URL: https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1959</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:35: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
-  df = pd.read_html(str(table), header=0)[0]
-C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:63: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
-  df["Year"] = df["Year"].ffill()</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Found 2 sentinel rows in this table.
@@ -481,12 +444,6 @@ C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:63: FutureWarni
 4  Singles from 1959  Singles from 1959  Singles from 1959  None  1959  
 Scraping URL: https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1960</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:35: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
-  df = pd.read_html(str(table), header=0)[0]
-C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:63: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
-  df["Year"] = df["Year"].ffill()</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Found 2 sentinel rows in this table.
   Top ten entry date                            Single          Artist(s)  \
@@ -503,12 +460,6 @@ C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:63: FutureWarni
 3                  9          January 4                  6  None  &lt;NA&gt;  
 4  Singles from 1960  Singles from 1960  Singles from 1960  None  1960  
 Scraping URL: https://en.wikipedia.org/wiki/List_of_Billboard_Hot_100_top-ten_singles_in_1961</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:35: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
-  df = pd.read_html(str(table), header=0)[0]
-C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:63: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
-  df["Year"] = df["Year"].ffill()</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Found 2 sentinel rows in this table.
@@ -528,12 +479,9 @@ C:\Users\harri\AppData\Local\Temp\ipykernel_109928\1447691552.py:63: FutureWarni
 </div>
 </div>
 <div id="5408f0c3" class="cell" data-execution_count="9">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(df))</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'Year'</span>].unique())</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'Year'</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(df))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'Year'</span>].unique())</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'Year'</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>365
 [2024 2025 1958 1959 1960 1961]
@@ -548,10 +496,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div id="e0f7fde8" class="cell" data-execution_count="10">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'Year'</span>] <span class="op">==</span> <span class="dv">1958</span>].head(<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'Year'</span>] <span class="op">==</span> <span class="dv">1958</span>].head(<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
@@ -798,10 +743,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <div id="8daf38b0" class="cell" data-execution_count="15">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 

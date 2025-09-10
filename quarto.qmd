@@ -39,6 +39,10 @@ import networkx as nx
 import calendar
 from pathlib import Path
 import re
+import plotly.io as pio
+
+# Use iframe renderer, which works reliably in Quarto HTML
+pio.renderers.default = "iframe"
 
 # Load data
 repo_root = Path().resolve()

@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: _site   # build folder for GitHub Pages
+
+website:
+  title: "Billboard Top Ten Analysis (1958–2025)"
+  navbar:
+    left:
+      - file: quarto.qmd
+        text: Home
+      - file: notebooks/analysis.ipynb
+        text: Analysis
+      - file: notebooks/scraper.ipynb
+        text: Scraper
+      - file: notebooks/spotify_api_test.ipynb
+        text: Spotify API Test
+
+format:
+  html:
+    theme: cosmo
+    code-fold: false
+    toc: true
+    toc-depth: 2
+    execute:
+      echo: true
+      warning: false
+      error: false
+      render: true

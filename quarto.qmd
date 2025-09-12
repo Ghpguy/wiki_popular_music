@@ -10,9 +10,11 @@ format:
     theme: cosmo
 ---
 
+![](images/billboard-top-10.jpg)
+
 # Introduction
 
-This report analyzes the Billboard Top Ten singles dataset, exploring trends in song longevity, peak positions, artist performance, and collaboration networks over time. The analysis leverages Python, pandas, and Plotly for data visualization and lifelines for survival analysis.
+This report analyzes the Billboard Top Ten singles dataset, exploring trends in song longevity, peak positions, artist performance, and collaboration networks over time. The analysis leverages Python, pandas, and Plotly for data visualization and lifelines for survival analysis. 
 
 ## Data Loading and Preprocessing
 
@@ -530,5 +532,7 @@ fig.show()
 
 This analysis provides a comprehensive overview of trends in the Billboard Top Ten, including song longevity, peak positions, artist performance, and collaboration networks. Further exploration could include genre-based analysis, deeper clustering, tests for statistical significance, or predictive modeling.
 
-jupyter: python3
+![](images/music.gif)
+
+
 ---

@@ -202,10 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sleeper-hits-cluster-2" id="toc-sleeper-hits-cluster-2" class="nav-link" data-scroll-target="#sleeper-hits-cluster-2">Sleeper Hits (Cluster 2)</a></li>
   </ul></li>
   <li><a href="#artist-collaboration-networks-by-decade" id="toc-artist-collaboration-networks-by-decade" class="nav-link" data-scroll-target="#artist-collaboration-networks-by-decade">Artist Collaboration Networks by Decade</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
-  <ul class="collapse">
-  <li><a href="#jupyter-python3" id="toc-jupyter-python3" class="nav-link" data-scroll-target="#jupyter-python3">jupyter: python3</a></li>
-  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -237,6 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p><img src="images/billboard-top-10.jpg" class="img-fluid"></p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>This report analyzes the Billboard Top Ten singles dataset, exploring trends in song longevity, peak positions, artist performance, and collaboration networks over time. The analysis leverages Python, pandas, and Plotly for data visualization and lifelines for survival analysis.</p>
@@ -246,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The data was collected using a custom Python scraper, available here: <a href="https://github.com/Ghpguy/wiki_popular_music/blob/main/utils/get_data.py">get_data.py on GitHub</a>.</p>
 <p>Preprocessing steps included: - Parsing chart dates and normalizing artist names - Handling collaborations and featured artists - Calculating song entry, peak, and longevity metrics - Removing duplicates and correcting known data errors The resulting CSV contains columns for song name, artist(s), entry/peak dates, peak position, weeks in top ten, and more.<br>
 <a href="https://github.com/Ghpguy/wiki_popular_music/blob/main/data/billboard_data_2025_09.csv">View the raw CSV on GitHub</a></p>
-<div id="2c475afe" class="cell" data-execution_count="1">
+<div id="d67a537d" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -364,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="song-longevity-in-the-top-ten" class="level1">
 <h1>Song Longevity in the Top Ten</h1>
 <p>How long do songs last in the Top Ten? Has it changed over time?</p>
-<div id="f317f64a" class="cell" data-execution_count="2">
+<div id="627b8314" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
@@ -392,7 +390,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 </div>
 <section id="overall-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="overall-distribution">Overall Distribution</h2>
-<div id="78796466" class="cell" data-execution_count="3">
+<div id="5a892f4e" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The overall average number of weeks a song spends in the top 10 is </span><span class="sc">{</span>df[<span class="st">'Weeks in Top Ten'</span>]<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss"> weeks"</span>)</span>
@@ -416,7 +414,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <section id="by-decade" class="level2">
 <h2 class="anchored" data-anchor-id="by-decade">By Decade</h2>
 <p>It seems that by decade the general trend is that songs are lasting longer on the top ten charts. Popular sentiment finds that songs have been lasting longer on the charts, making it harder for newer songs / artists to compete in the space.</p>
-<div id="50d0e7dd" class="cell" data-execution_count="4">
+<div id="51e38901" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>decade_stats <span class="op">=</span> df.groupby(<span class="st">'Decade'</span>, as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'Weeks in Top Ten'</span>].mean()</span>
@@ -436,7 +434,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 </section>
 <section id="by-year" class="level2">
 <h2 class="anchored" data-anchor-id="by-year">By Year</h2>
-<div id="296017cb" class="cell" data-execution_count="5">
+<div id="2bbd0f9a" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> df.groupby(<span class="st">"Year"</span>)[<span class="st">"Weeks in Top Ten"</span>].mean().reset_index()</span>
@@ -460,7 +458,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <p>This section applies survival analysis to the Billboard Top Ten singles dataset, using the Kaplan-Meier estimator to model the probability that a song remains in the Top Ten as weeks progress. The survival curve visualizes the likelihood of a song staying in the Top Ten over time, both for all songs and broken down by decade. This helps reveal changes in song longevity and chart dynamics across different eras.</p>
 <section id="survival-curve-all-songs" class="level2">
 <h2 class="anchored" data-anchor-id="survival-curve-all-songs">Survival Curve (All Songs)</h2>
-<div id="179f66ed" class="cell" data-execution_count="6">
+<div id="9e183291" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>kmf <span class="op">=</span> KaplanMeierFitter()</span>
@@ -483,7 +481,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 </section>
 <section id="survival-curves-by-decade" class="level2">
 <h2 class="anchored" data-anchor-id="survival-curves-by-decade">Survival Curves by Decade</h2>
-<div id="2c3c7e8b" class="cell" data-execution_count="7">
+<div id="114e80b5" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> go.Figure()</span>
@@ -557,7 +555,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <p>This section explores the distribution and trends of peak chart positions for songs in the Billboard Top Ten. It examines how often songs reach each peak position, and analyzes changes in average peak positions over decades and years. The visualizations help reveal whether songs are more likely to reach higher or lower peaks over time, and provide insight into the competitiveness of the charts across different eras. Overall it seems that peak position competitiveness remains mostly similar.</p>
 <section id="distribution-of-peak-positions" class="level2">
 <h2 class="anchored" data-anchor-id="distribution-of-peak-positions">Distribution of Peak Positions</h2>
-<div id="e839985e" class="cell" data-execution_count="8">
+<div id="39f4c083" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
@@ -576,7 +574,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 </section>
 <section id="average-peak-by-decade" class="level2">
 <h2 class="anchored" data-anchor-id="average-peak-by-decade">Average Peak by Decade</h2>
-<div id="9b1b4922" class="cell" data-execution_count="9">
+<div id="d6a8ba84" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>decade_stats <span class="op">=</span> df.groupby(<span class="st">'Decade'</span>, as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'Peak'</span>].mean()</span>
@@ -596,7 +594,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 </section>
 <section id="average-peak-by-year" class="level2">
 <h2 class="anchored" data-anchor-id="average-peak-by-year">Average Peak by Year</h2>
-<div id="096e0833" class="cell" data-execution_count="10">
+<div id="85271619" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> df.groupby(<span class="st">"Year"</span>)[<span class="st">"Peak"</span>].mean().reset_index()</span>
@@ -618,7 +616,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <section id="longevity-by-peak-position" class="level1">
 <h1>Longevity by Peak Position</h1>
 <p>This section examines how the longevity of a song in the Top Ten relates to its peak chart position. By analyzing the average number of weeks songs spend in the Top Ten for each peak position (from #1 to #10), we can see whether songs that reach higher peaks tend to have longer or shorter chart runs. This helps reveal if top-performing songs dominate the charts for longer periods, or if lower-peaking songs can also achieve significant longevity.</p>
-<div id="a4272f36" class="cell" data-execution_count="11">
+<div id="6f3ff543" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>longevity_by_peak <span class="op">=</span> df.groupby(<span class="st">"Peak"</span>)[<span class="st">"Weeks in Top Ten"</span>].mean().reset_index()</span>
@@ -642,7 +640,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <section id="number-of-entries-per-year" class="level1">
 <h1>Number of Entries per Year</h1>
 <p>This supplemental chart demonstarates the result of songs living longer in the top ten - as a result we are seeing less entries breaking into the top ten and removing older top ten hits.</p>
-<div id="cf31ae61" class="cell" data-execution_count="12">
+<div id="c28d0e35" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>entries_per_year <span class="op">=</span> df.groupby(<span class="st">"Year"</span>)[<span class="st">"Single Name"</span>].count().reset_index()</span>
@@ -666,7 +664,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <p>So which artists are we seeing occupy the most real estate on the charts?</p>
 <section id="top-10-artists-by-top-ten-entries" class="level2">
 <h2 class="anchored" data-anchor-id="top-10-artists-by-top-ten-entries">Top 10 Artists by Top Ten Entries</h2>
-<div id="44f93bb0" class="cell" data-execution_count="13">
+<div id="b1ee6e16" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>top_artists <span class="op">=</span> df[<span class="st">"Artist(s)"</span>].value_counts().reset_index()</span>
@@ -690,7 +688,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <section id="top-10-artists-by-top-ten-real-estate" class="level2">
 <h2 class="anchored" data-anchor-id="top-10-artists-by-top-ten-real-estate">Top 10 Artists by Top Ten Real Estate</h2>
 <p>This chart shows the top artists by the total amount of weekly space they have occupied on the top ten charts</p>
-<div id="9ec67c84" class="cell" data-execution_count="14">
+<div id="92fd4648" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total weeks in Top Ten for each artist</span></span>
@@ -724,7 +722,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <section id="one-hit-wonders" class="level2">
 <h2 class="anchored" data-anchor-id="one-hit-wonders">One-Hit Wonders</h2>
 <p>Which artists make one entry on the top ten charts but never return?</p>
-<div id="cd65ccc5" class="cell" data-execution_count="15">
+<div id="11b3d0e2" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>artist_song_counts <span class="op">=</span> df.groupby(<span class="st">"Artist(s)"</span>)[<span class="st">"Single Name"</span>].nunique()</span>
@@ -740,7 +738,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <section id="seasonality-top-ten-entries-by-month-and-decade" class="level1">
 <h1>Seasonality: Top Ten Entries by Month and Decade</h1>
 <p>Do more songs enter the top ten during certain months compared to other months? (Holiday Songs Excluded)</p>
-<div id="d7fe81ab" class="cell" data-execution_count="16">
+<div id="5fddf244" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Month'</span>] <span class="op">=</span> df[<span class="st">'Top Ten Entry Date'</span>].dt.month</span>
@@ -767,7 +765,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <section id="song-trajectory-lag-to-peak" class="level1">
 <h1>Song Trajectory: Lag to Peak</h1>
 <p>The “Lag to Peak” metric measures the number of days between a song’s entry into the Top Ten and the date it reaches its highest chart position. This helps identify songs that quickly shoot to their peak versus those that climb more gradually—so-called “sleeper hits.” The distribution below shows that while many songs reach their peak soon after entering the Top Ten, a notable subset takes several weeks or even months to peak, reflecting different promotional strategies, viral trends, or seasonal effects.</p>
-<div id="c4fcafd6" class="cell" data-execution_count="17">
+<div id="c8b5b116" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Lag to Peak"</span>] <span class="op">=</span> (df[<span class="st">"Peak Date"</span>] <span class="op">-</span> df[<span class="st">"Top Ten Entry Date"</span>]).dt.days</span>
@@ -786,7 +784,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 </div>
 <section id="top-10-songs-with-greatest-lag-to-peak" class="level2">
 <h2 class="anchored" data-anchor-id="top-10-songs-with-greatest-lag-to-peak">Top 10 Songs with Greatest Lag to Peak</h2>
-<div id="47688979" class="cell" data-execution_count="18">
+<div id="3029866b" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>top_lag <span class="op">=</span> df.nlargest(<span class="dv">10</span>, <span class="st">"Lag to Peak"</span>)[[<span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>, <span class="st">"Lag to Peak"</span>, <span class="st">"Top Ten Entry Date"</span>, <span class="st">"Peak Date"</span>]]</span>
@@ -815,7 +813,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 </section>
 <section id="longest-running-top-ten-songs" class="level1">
 <h1>Longest-Running Top Ten Songs</h1>
-<div id="e044b3dc" class="cell" data-execution_count="19">
+<div id="b166490a" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>longest <span class="op">=</span> df.nlargest(<span class="dv">20</span>, <span class="st">"Weeks in Top Ten"</span>)[[<span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>, <span class="st">"Weeks in Top Ten"</span>]]</span>
@@ -838,7 +836,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <section id="clustering-song-trajectories" class="level1">
 <h1>Clustering Song Trajectories</h1>
 <p>This section uses K-means clustering to group songs based on their chart trajectory characteristics: “Lag to Peak” (how long it took to reach peak position), “Weeks in Top Ten” (overall longevity), and “Peak” (best chart position). By visualizing these clusters, we can identify distinct types of hits, such as instant chart-toppers, slow-burn “sleeper hits,” and songs with brief or moderate success. The scatter plot below shows each song colored by its assigned cluster, helping to reveal patterns in how songs move through the Top Ten.</p>
-<div id="97592301" class="cell" data-execution_count="20">
+<div id="500cef84" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clustering_plotly(df, k<span class="op">=</span><span class="dv">4</span>):</span>
@@ -863,7 +861,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 </div>
 <section id="sleeper-hits-cluster-2" class="level2">
 <h2 class="anchored" data-anchor-id="sleeper-hits-cluster-2">Sleeper Hits (Cluster 2)</h2>
-<div id="43894027" class="cell" data-execution_count="21">
+<div id="4a113a27" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cluster_2_songs <span class="op">=</span> df[df[<span class="st">"Cluster"</span>] <span class="op">==</span> <span class="st">"2"</span>][[<span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>, <span class="st">"Weeks in Top Ten"</span>, <span class="st">"Lag to Peak"</span>, <span class="st">"Peak"</span>]]</span>
@@ -890,7 +888,7 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <section id="artist-collaboration-networks-by-decade" class="level1">
 <h1>Artist Collaboration Networks by Decade</h1>
 <p>This section visualizes how artists collaborate within each decade, revealing the most central figures in the collaboration network for each era. For every decade, a network graph is constructed where nodes represent artists and edges indicate collaborations (including features and joint credits). The top 10 most connected artists (by degree centrality) are highlighted, and their collaboration networks are visualized using interactive network diagrams. This helps illustrate how collaboration patterns and key influencers have evolved across decades in popular music.</p>
-<div id="54214471" class="cell" data-execution_count="22">
+<div id="f7c01c49" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>frames <span class="op">=</span> []</span>
@@ -965,13 +963,12 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
 <p>This analysis provides a comprehensive overview of trends in the Billboard Top Ten, including song longevity, peak positions, artist performance, and collaboration networks. Further exploration could include genre-based analysis, deeper clustering, tests for statistical significance, or predictive modeling.</p>
-<section id="jupyter-python3" class="level2">
-<h2 class="anchored" data-anchor-id="jupyter-python3">jupyter: python3</h2>
+<p><img src="images/music.gif" class="img-fluid"></p>
+<hr>
 
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1438,528 +1435,532 @@ Name: Weeks in Top Ten, dtype: float64</code></pre>
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: cosmo</span></span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/billboard-top-10.jpg)</span></span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>This report analyzes the Billboard Top Ten singles dataset, exploring trends in song longevity, peak positions, artist performance, and collaboration networks over time. The analysis leverages Python, pandas, and Plotly for data visualization and lifelines for survival analysis.</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
 <span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Loading and Preprocessing</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>This report analyzes the Billboard Top Ten singles dataset, exploring trends in song longevity, peak positions, artist performance, and collaboration networks over time. The analysis leverages Python, pandas, and Plotly for data visualization and lifelines for survival analysis. </span>
 <span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>The data was scraped and pre-processed from <span class="co">[</span><span class="ot">Billboard's published Top Ten singles charts</span><span class="co">](https://en.wikipedia.org/wiki/Lists_of_Billboard_Hot_100_top-ten_singles)</span>.</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Loading and Preprocessing</span></span>
 <span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>The data was collected using a custom Python scraper, available here: <span class="co">[</span><span class="ot">get_data.py on GitHub</span><span class="co">](https://github.com/Ghpguy/wiki_popular_music/blob/main/utils/get_data.py)</span>.</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>The data was scraped and pre-processed from <span class="co">[</span><span class="ot">Billboard's published Top Ten singles charts</span><span class="co">](https://en.wikipedia.org/wiki/Lists_of_Billboard_Hot_100_top-ten_singles)</span>.</span>
 <span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>Preprocessing steps included:</span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Parsing chart dates and normalizing artist names</span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Handling collaborations and featured artists</span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Calculating song entry, peak, and longevity metrics</span>
-<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Removing duplicates and correcting known data errors</span>
-<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>The resulting CSV contains columns for song name, artist(s), entry/peak dates, peak position, weeks in top ten, and more.  </span>
-<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">View the raw CSV on GitHub</span><span class="co">](https://github.com/Ghpguy/wiki_popular_music/blob/main/data/billboard_data_2025_09.csv)</span></span>
-<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
-<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lifelines <span class="im">import</span> KaplanMeierFitter</span>
-<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
-<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
-<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> calendar</span>
-<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
-<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Use iframe renderer, which works reliably in Quarto HTML</span></span>
-<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">"iframe"</span></span>
-<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a>repo_root <span class="op">=</span> Path().resolve()</span>
-<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>csv_path <span class="op">=</span> repo_root <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"billboard_data_2025_09.csv"</span></span>
-<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(csv_path)</span>
-<span id="cb26-53"><a href="#cb26-53" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Top Ten Entry Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Top Ten Entry Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
-<span id="cb26-54"><a href="#cb26-54" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Peak Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Peak Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
-<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Decade'</span>] <span class="op">=</span> (df[<span class="st">'Top Ten Entry Date'</span>].dt.year <span class="op">//</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
-<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a>df.head()</span>
-<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a><span class="fu"># Song Longevity in the Top Ten</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>The data was collected using a custom Python scraper, available here: <span class="co">[</span><span class="ot">get_data.py on GitHub</span><span class="co">](https://github.com/Ghpguy/wiki_popular_music/blob/main/utils/get_data.py)</span>.</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>Preprocessing steps included:</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Parsing chart dates and normalizing artist names</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Handling collaborations and featured artists</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Calculating song entry, peak, and longevity metrics</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Removing duplicates and correcting known data errors</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>The resulting CSV contains columns for song name, artist(s), entry/peak dates, peak position, weeks in top ten, and more.  </span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">View the raw CSV on GitHub</span><span class="co">](https://github.com/Ghpguy/wiki_popular_music/blob/main/data/billboard_data_2025_09.csv)</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lifelines <span class="im">import</span> KaplanMeierFitter</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> calendar</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Use iframe renderer, which works reliably in Quarto HTML</span></span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">"iframe"</span></span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>repo_root <span class="op">=</span> Path().resolve()</span>
+<span id="cb26-53"><a href="#cb26-53" aria-hidden="true" tabindex="-1"></a>csv_path <span class="op">=</span> repo_root <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"billboard_data_2025_09.csv"</span></span>
+<span id="cb26-54"><a href="#cb26-54" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(csv_path)</span>
+<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Top Ten Entry Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Top Ten Entry Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Peak Date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Peak Date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Decade'</span>] <span class="op">=</span> (df[<span class="st">'Top Ten Entry Date'</span>].dt.year <span class="op">//</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a>df.head()</span>
+<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-60"><a href="#cb26-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-61"><a href="#cb26-61" aria-hidden="true" tabindex="-1"></a>How long do songs last in the Top Ten? Has it changed over time?</span>
+<span id="cb26-61"><a href="#cb26-61" aria-hidden="true" tabindex="-1"></a><span class="fu"># Song Longevity in the Top Ten</span></span>
 <span id="cb26-62"><a href="#cb26-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb26-67"><a href="#cb26-67" aria-hidden="true" tabindex="-1"></a>  <span class="ss">f"Average weeks in Top Ten (all songs): </span><span class="sc">{</span>df[<span class="st">'Weeks in Top Ten'</span>]<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span></span>
-<span id="cb26-68"><a href="#cb26-68" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-69"><a href="#cb26-69" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb26-70"><a href="#cb26-70" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Average weeks in Top Ten by decade:</span><span class="ch">\n</span><span class="st">"</span>,</span>
-<span id="cb26-71"><a href="#cb26-71" aria-hidden="true" tabindex="-1"></a>  df.groupby(<span class="st">'Decade'</span>)[<span class="st">'Weeks in Top Ten'</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb26-72"><a href="#cb26-72" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-73"><a href="#cb26-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-74"><a href="#cb26-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-75"><a href="#cb26-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overall Distribution</span></span>
+<span id="cb26-63"><a href="#cb26-63" aria-hidden="true" tabindex="-1"></a>How long do songs last in the Top Ten? Has it changed over time?</span>
+<span id="cb26-64"><a href="#cb26-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-67"><a href="#cb26-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-68"><a href="#cb26-68" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb26-69"><a href="#cb26-69" aria-hidden="true" tabindex="-1"></a>  <span class="ss">f"Average weeks in Top Ten (all songs): </span><span class="sc">{</span>df[<span class="st">'Weeks in Top Ten'</span>]<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span></span>
+<span id="cb26-70"><a href="#cb26-70" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-71"><a href="#cb26-71" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb26-72"><a href="#cb26-72" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Average weeks in Top Ten by decade:</span><span class="ch">\n</span><span class="st">"</span>,</span>
+<span id="cb26-73"><a href="#cb26-73" aria-hidden="true" tabindex="-1"></a>  df.groupby(<span class="st">'Decade'</span>)[<span class="st">'Weeks in Top Ten'</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb26-74"><a href="#cb26-74" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-75"><a href="#cb26-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-76"><a href="#cb26-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-79"><a href="#cb26-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-80"><a href="#cb26-80" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The overall average number of weeks a song spends in the top 10 is </span><span class="sc">{</span>df[<span class="st">'Weeks in Top Ten'</span>]<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss"> weeks"</span>)</span>
-<span id="cb26-81"><a href="#cb26-81" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb26-82"><a href="#cb26-82" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'Weeks in Top Ten'</span>].value_counts().sort_index().reset_index(),</span>
-<span id="cb26-83"><a href="#cb26-83" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">'Weeks in Top Ten'</span>,</span>
-<span id="cb26-84"><a href="#cb26-84" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">'count'</span>,</span>
-<span id="cb26-85"><a href="#cb26-85" aria-hidden="true" tabindex="-1"></a>  text_auto<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb26-86"><a href="#cb26-86" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Overall Distribution of Weeks in Top Ten (Exact Weeks)"</span></span>
-<span id="cb26-87"><a href="#cb26-87" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-88"><a href="#cb26-88" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-89"><a href="#cb26-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-90"><a href="#cb26-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-91"><a href="#cb26-91" aria-hidden="true" tabindex="-1"></a><span class="fu">## By Decade</span></span>
+<span id="cb26-77"><a href="#cb26-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overall Distribution</span></span>
+<span id="cb26-78"><a href="#cb26-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-81"><a href="#cb26-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-82"><a href="#cb26-82" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The overall average number of weeks a song spends in the top 10 is </span><span class="sc">{</span>df[<span class="st">'Weeks in Top Ten'</span>]<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss"> weeks"</span>)</span>
+<span id="cb26-83"><a href="#cb26-83" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb26-84"><a href="#cb26-84" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'Weeks in Top Ten'</span>].value_counts().sort_index().reset_index(),</span>
+<span id="cb26-85"><a href="#cb26-85" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">'Weeks in Top Ten'</span>,</span>
+<span id="cb26-86"><a href="#cb26-86" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">'count'</span>,</span>
+<span id="cb26-87"><a href="#cb26-87" aria-hidden="true" tabindex="-1"></a>  text_auto<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb26-88"><a href="#cb26-88" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Overall Distribution of Weeks in Top Ten (Exact Weeks)"</span></span>
+<span id="cb26-89"><a href="#cb26-89" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-90"><a href="#cb26-90" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-91"><a href="#cb26-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-92"><a href="#cb26-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-93"><a href="#cb26-93" aria-hidden="true" tabindex="-1"></a>It seems that by decade the general trend is that songs are lasting longer on the top ten charts. Popular sentiment finds that songs have been lasting longer on the charts, making it harder for newer songs / artists to compete in the space. </span>
+<span id="cb26-93"><a href="#cb26-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## By Decade</span></span>
 <span id="cb26-94"><a href="#cb26-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-97"><a href="#cb26-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-98"><a href="#cb26-98" aria-hidden="true" tabindex="-1"></a>decade_stats <span class="op">=</span> df.groupby(<span class="st">'Decade'</span>, as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'Weeks in Top Ten'</span>].mean()</span>
-<span id="cb26-99"><a href="#cb26-99" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb26-100"><a href="#cb26-100" aria-hidden="true" tabindex="-1"></a>  decade_stats,</span>
-<span id="cb26-101"><a href="#cb26-101" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">'Decade'</span>,</span>
-<span id="cb26-102"><a href="#cb26-102" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">'Weeks in Top Ten'</span>,</span>
-<span id="cb26-103"><a href="#cb26-103" aria-hidden="true" tabindex="-1"></a>  text_auto<span class="op">=</span><span class="st">'.2f'</span>,</span>
-<span id="cb26-104"><a href="#cb26-104" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Average Weeks in Top Ten by Decade"</span></span>
-<span id="cb26-105"><a href="#cb26-105" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-106"><a href="#cb26-106" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-107"><a href="#cb26-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-108"><a href="#cb26-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-109"><a href="#cb26-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## By Year</span></span>
+<span id="cb26-95"><a href="#cb26-95" aria-hidden="true" tabindex="-1"></a>It seems that by decade the general trend is that songs are lasting longer on the top ten charts. Popular sentiment finds that songs have been lasting longer on the charts, making it harder for newer songs / artists to compete in the space. </span>
+<span id="cb26-96"><a href="#cb26-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-99"><a href="#cb26-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-100"><a href="#cb26-100" aria-hidden="true" tabindex="-1"></a>decade_stats <span class="op">=</span> df.groupby(<span class="st">'Decade'</span>, as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'Weeks in Top Ten'</span>].mean()</span>
+<span id="cb26-101"><a href="#cb26-101" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb26-102"><a href="#cb26-102" aria-hidden="true" tabindex="-1"></a>  decade_stats,</span>
+<span id="cb26-103"><a href="#cb26-103" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">'Decade'</span>,</span>
+<span id="cb26-104"><a href="#cb26-104" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">'Weeks in Top Ten'</span>,</span>
+<span id="cb26-105"><a href="#cb26-105" aria-hidden="true" tabindex="-1"></a>  text_auto<span class="op">=</span><span class="st">'.2f'</span>,</span>
+<span id="cb26-106"><a href="#cb26-106" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Average Weeks in Top Ten by Decade"</span></span>
+<span id="cb26-107"><a href="#cb26-107" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-108"><a href="#cb26-108" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-109"><a href="#cb26-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-110"><a href="#cb26-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-113"><a href="#cb26-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-114"><a href="#cb26-114" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> df.groupby(<span class="st">"Year"</span>)[<span class="st">"Weeks in Top Ten"</span>].mean().reset_index()</span>
-<span id="cb26-115"><a href="#cb26-115" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(</span>
-<span id="cb26-116"><a href="#cb26-116" aria-hidden="true" tabindex="-1"></a>  trend,</span>
-<span id="cb26-117"><a href="#cb26-117" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Year"</span>,</span>
-<span id="cb26-118"><a href="#cb26-118" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-119"><a href="#cb26-119" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Average Weeks in Top Ten Over Time Per Year"</span>,</span>
-<span id="cb26-120"><a href="#cb26-120" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"Weeks in Top Ten"</span>: <span class="st">"Avg Weeks"</span>, <span class="st">"Year"</span>: <span class="st">"Year"</span>}</span>
-<span id="cb26-121"><a href="#cb26-121" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-122"><a href="#cb26-122" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-123"><a href="#cb26-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-124"><a href="#cb26-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-125"><a href="#cb26-125" aria-hidden="true" tabindex="-1"></a><span class="fu"># Survival Analysis</span></span>
+<span id="cb26-111"><a href="#cb26-111" aria-hidden="true" tabindex="-1"></a><span class="fu">## By Year</span></span>
+<span id="cb26-112"><a href="#cb26-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-115"><a href="#cb26-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-116"><a href="#cb26-116" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> df.groupby(<span class="st">"Year"</span>)[<span class="st">"Weeks in Top Ten"</span>].mean().reset_index()</span>
+<span id="cb26-117"><a href="#cb26-117" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(</span>
+<span id="cb26-118"><a href="#cb26-118" aria-hidden="true" tabindex="-1"></a>  trend,</span>
+<span id="cb26-119"><a href="#cb26-119" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb26-120"><a href="#cb26-120" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-121"><a href="#cb26-121" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Average Weeks in Top Ten Over Time Per Year"</span>,</span>
+<span id="cb26-122"><a href="#cb26-122" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"Weeks in Top Ten"</span>: <span class="st">"Avg Weeks"</span>, <span class="st">"Year"</span>: <span class="st">"Year"</span>}</span>
+<span id="cb26-123"><a href="#cb26-123" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-124"><a href="#cb26-124" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-125"><a href="#cb26-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-126"><a href="#cb26-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-127"><a href="#cb26-127" aria-hidden="true" tabindex="-1"></a>This section applies survival analysis to the Billboard Top Ten singles dataset, using the Kaplan-Meier estimator to model the probability that a song remains in the Top Ten as weeks progress. The survival curve visualizes the likelihood of a song staying in the Top Ten over time, both for all songs and broken down by decade. This helps reveal changes in song longevity and chart dynamics across different eras.</span>
+<span id="cb26-127"><a href="#cb26-127" aria-hidden="true" tabindex="-1"></a><span class="fu"># Survival Analysis</span></span>
 <span id="cb26-128"><a href="#cb26-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-129"><a href="#cb26-129" aria-hidden="true" tabindex="-1"></a><span class="fu">## Survival Curve (All Songs)</span></span>
+<span id="cb26-129"><a href="#cb26-129" aria-hidden="true" tabindex="-1"></a>This section applies survival analysis to the Billboard Top Ten singles dataset, using the Kaplan-Meier estimator to model the probability that a song remains in the Top Ten as weeks progress. The survival curve visualizes the likelihood of a song staying in the Top Ten over time, both for all songs and broken down by decade. This helps reveal changes in song longevity and chart dynamics across different eras.</span>
 <span id="cb26-130"><a href="#cb26-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-133"><a href="#cb26-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-134"><a href="#cb26-134" aria-hidden="true" tabindex="-1"></a>kmf <span class="op">=</span> KaplanMeierFitter()</span>
-<span id="cb26-135"><a href="#cb26-135" aria-hidden="true" tabindex="-1"></a>kmf.fit(df[<span class="st">"Weeks in Top Ten"</span>], event_observed<span class="op">=</span>[<span class="dv">1</span>]<span class="op">*</span><span class="bu">len</span>(df))</span>
-<span id="cb26-136"><a href="#cb26-136" aria-hidden="true" tabindex="-1"></a>survival_df <span class="op">=</span> kmf.survival_function_.reset_index()</span>
-<span id="cb26-137"><a href="#cb26-137" aria-hidden="true" tabindex="-1"></a>survival_df.columns <span class="op">=</span> [<span class="st">"Weeks in Top Ten"</span>, <span class="st">"Probability of Staying"</span>]</span>
-<span id="cb26-138"><a href="#cb26-138" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(</span>
-<span id="cb26-139"><a href="#cb26-139" aria-hidden="true" tabindex="-1"></a>  survival_df,</span>
-<span id="cb26-140"><a href="#cb26-140" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-141"><a href="#cb26-141" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Probability of Staying"</span>,</span>
-<span id="cb26-142"><a href="#cb26-142" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Survival Curve of Billboard Top Ten Singles"</span>,</span>
-<span id="cb26-143"><a href="#cb26-143" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"Weeks in Top Ten"</span>: <span class="st">"Weeks in Top Ten"</span>, <span class="st">"Probability of Staying"</span>: <span class="st">"Probability of Staying in Top Ten"</span>}</span>
-<span id="cb26-144"><a href="#cb26-144" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-145"><a href="#cb26-145" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-146"><a href="#cb26-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-147"><a href="#cb26-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-148"><a href="#cb26-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Survival Curves by Decade</span></span>
+<span id="cb26-131"><a href="#cb26-131" aria-hidden="true" tabindex="-1"></a><span class="fu">## Survival Curve (All Songs)</span></span>
+<span id="cb26-132"><a href="#cb26-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-135"><a href="#cb26-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-136"><a href="#cb26-136" aria-hidden="true" tabindex="-1"></a>kmf <span class="op">=</span> KaplanMeierFitter()</span>
+<span id="cb26-137"><a href="#cb26-137" aria-hidden="true" tabindex="-1"></a>kmf.fit(df[<span class="st">"Weeks in Top Ten"</span>], event_observed<span class="op">=</span>[<span class="dv">1</span>]<span class="op">*</span><span class="bu">len</span>(df))</span>
+<span id="cb26-138"><a href="#cb26-138" aria-hidden="true" tabindex="-1"></a>survival_df <span class="op">=</span> kmf.survival_function_.reset_index()</span>
+<span id="cb26-139"><a href="#cb26-139" aria-hidden="true" tabindex="-1"></a>survival_df.columns <span class="op">=</span> [<span class="st">"Weeks in Top Ten"</span>, <span class="st">"Probability of Staying"</span>]</span>
+<span id="cb26-140"><a href="#cb26-140" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(</span>
+<span id="cb26-141"><a href="#cb26-141" aria-hidden="true" tabindex="-1"></a>  survival_df,</span>
+<span id="cb26-142"><a href="#cb26-142" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-143"><a href="#cb26-143" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Probability of Staying"</span>,</span>
+<span id="cb26-144"><a href="#cb26-144" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Survival Curve of Billboard Top Ten Singles"</span>,</span>
+<span id="cb26-145"><a href="#cb26-145" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"Weeks in Top Ten"</span>: <span class="st">"Weeks in Top Ten"</span>, <span class="st">"Probability of Staying"</span>: <span class="st">"Probability of Staying in Top Ten"</span>}</span>
+<span id="cb26-146"><a href="#cb26-146" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-147"><a href="#cb26-147" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-148"><a href="#cb26-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-149"><a href="#cb26-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-152"><a href="#cb26-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-153"><a href="#cb26-153" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> go.Figure()</span>
-<span id="cb26-154"><a href="#cb26-154" aria-hidden="true" tabindex="-1"></a>kmf <span class="op">=</span> KaplanMeierFitter()</span>
-<span id="cb26-155"><a href="#cb26-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-156"><a href="#cb26-156" aria-hidden="true" tabindex="-1"></a><span class="co"># Only unique decades</span></span>
-<span id="cb26-157"><a href="#cb26-157" aria-hidden="true" tabindex="-1"></a>decades <span class="op">=</span> <span class="bu">sorted</span>(df[<span class="st">'Decade'</span>].dropna().unique())</span>
-<span id="cb26-158"><a href="#cb26-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-159"><a href="#cb26-159" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, decade <span class="kw">in</span> <span class="bu">enumerate</span>(decades):</span>
-<span id="cb26-160"><a href="#cb26-160" aria-hidden="true" tabindex="-1"></a>    group <span class="op">=</span> df[df[<span class="st">'Decade'</span>] <span class="op">==</span> decade]</span>
-<span id="cb26-161"><a href="#cb26-161" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(group) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb26-162"><a href="#cb26-162" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
-<span id="cb26-163"><a href="#cb26-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-164"><a href="#cb26-164" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fit Kaplan-Meier curve</span></span>
-<span id="cb26-165"><a href="#cb26-165" aria-hidden="true" tabindex="-1"></a>    kmf.fit(group[<span class="st">"Weeks in Top Ten"</span>], event_observed<span class="op">=</span>[<span class="dv">1</span>]<span class="op">*</span><span class="bu">len</span>(group))</span>
-<span id="cb26-166"><a href="#cb26-166" aria-hidden="true" tabindex="-1"></a>    surv <span class="op">=</span> kmf.survival_function_.reset_index()</span>
-<span id="cb26-167"><a href="#cb26-167" aria-hidden="true" tabindex="-1"></a>    surv.columns <span class="op">=</span> [<span class="st">"Weeks in Top Ten"</span>, <span class="st">"Probability of Staying"</span>]</span>
-<span id="cb26-168"><a href="#cb26-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-169"><a href="#cb26-169" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add survival curve</span></span>
-<span id="cb26-170"><a href="#cb26-170" aria-hidden="true" tabindex="-1"></a>    fig.add_trace(</span>
-<span id="cb26-171"><a href="#cb26-171" aria-hidden="true" tabindex="-1"></a>        go.Scatter(</span>
-<span id="cb26-172"><a href="#cb26-172" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>surv[<span class="st">"Weeks in Top Ten"</span>],</span>
-<span id="cb26-173"><a href="#cb26-173" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>surv[<span class="st">"Probability of Staying"</span>],</span>
-<span id="cb26-174"><a href="#cb26-174" aria-hidden="true" tabindex="-1"></a>            mode<span class="op">=</span><span class="st">"lines"</span>,</span>
-<span id="cb26-175"><a href="#cb26-175" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span><span class="bu">str</span>(decade),</span>
-<span id="cb26-176"><a href="#cb26-176" aria-hidden="true" tabindex="-1"></a>            line<span class="op">=</span><span class="bu">dict</span>(width<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb26-177"><a href="#cb26-177" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb26-178"><a href="#cb26-178" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb26-179"><a href="#cb26-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-180"><a href="#cb26-180" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Automatically pick evenly spaced points along the middle 80% of the curve</span></span>
-<span id="cb26-181"><a href="#cb26-181" aria-hidden="true" tabindex="-1"></a>    n_labels <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb26-182"><a href="#cb26-182" aria-hidden="true" tabindex="-1"></a>    start_idx <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(surv) <span class="op">*</span> <span class="fl">0.3</span>)   <span class="co"># skip first 10%</span></span>
-<span id="cb26-183"><a href="#cb26-183" aria-hidden="true" tabindex="-1"></a>    end_idx <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(surv) <span class="op">*</span> <span class="fl">0.95</span>)     <span class="co"># skip last 10%</span></span>
-<span id="cb26-184"><a href="#cb26-184" aria-hidden="true" tabindex="-1"></a>    indices <span class="op">=</span> np.linspace(start_idx, end_idx, n_labels, dtype<span class="op">=</span><span class="bu">int</span>)</span>
-<span id="cb26-185"><a href="#cb26-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-186"><a href="#cb26-186" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j, idx <span class="kw">in</span> <span class="bu">enumerate</span>(indices):</span>
-<span id="cb26-187"><a href="#cb26-187" aria-hidden="true" tabindex="-1"></a>        <span class="co"># stagger labels vertically to reduce overlap</span></span>
-<span id="cb26-188"><a href="#cb26-188" aria-hidden="true" tabindex="-1"></a>        y_offset <span class="op">=</span> <span class="dv">15</span> <span class="op">*</span> (i <span class="op">-</span> <span class="bu">len</span>(decades)<span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> (j <span class="op">-</span> (n_labels<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>)</span>
-<span id="cb26-189"><a href="#cb26-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-190"><a href="#cb26-190" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add annotation once per point</span></span>
-<span id="cb26-191"><a href="#cb26-191" aria-hidden="true" tabindex="-1"></a>        fig.add_annotation(</span>
-<span id="cb26-192"><a href="#cb26-192" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>surv[<span class="st">"Weeks in Top Ten"</span>].iloc[idx],</span>
-<span id="cb26-193"><a href="#cb26-193" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>surv[<span class="st">"Probability of Staying"</span>].iloc[idx],</span>
-<span id="cb26-194"><a href="#cb26-194" aria-hidden="true" tabindex="-1"></a>            text<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>decade<span class="sc">}</span><span class="ss">"</span>,</span>
-<span id="cb26-195"><a href="#cb26-195" aria-hidden="true" tabindex="-1"></a>            showarrow<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb26-196"><a href="#cb26-196" aria-hidden="true" tabindex="-1"></a>            arrowhead<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb26-197"><a href="#cb26-197" aria-hidden="true" tabindex="-1"></a>            font<span class="op">=</span><span class="bu">dict</span>(size<span class="op">=</span><span class="dv">12</span>),</span>
-<span id="cb26-198"><a href="#cb26-198" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb26-199"><a href="#cb26-199" aria-hidden="true" tabindex="-1"></a>            ay<span class="op">=-</span>y_offset</span>
-<span id="cb26-200"><a href="#cb26-200" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb26-201"><a href="#cb26-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-202"><a href="#cb26-202" aria-hidden="true" tabindex="-1"></a><span class="co"># Layout</span></span>
-<span id="cb26-203"><a href="#cb26-203" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
-<span id="cb26-204"><a href="#cb26-204" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Survival Curves of Billboard Top Ten Singles by Decade"</span>,</span>
-<span id="cb26-205"><a href="#cb26-205" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-206"><a href="#cb26-206" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">"Probability of Staying in Top Ten"</span>,</span>
-<span id="cb26-207"><a href="#cb26-207" aria-hidden="true" tabindex="-1"></a>    yaxis<span class="op">=</span><span class="bu">dict</span>(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>]),</span>
-<span id="cb26-208"><a href="#cb26-208" aria-hidden="true" tabindex="-1"></a>    showlegend<span class="op">=</span><span class="va">True</span></span>
-<span id="cb26-209"><a href="#cb26-209" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-210"><a href="#cb26-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-211"><a href="#cb26-211" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-212"><a href="#cb26-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-213"><a href="#cb26-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-214"><a href="#cb26-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-215"><a href="#cb26-215" aria-hidden="true" tabindex="-1"></a><span class="fu"># Peak Positions</span></span>
+<span id="cb26-150"><a href="#cb26-150" aria-hidden="true" tabindex="-1"></a><span class="fu">## Survival Curves by Decade</span></span>
+<span id="cb26-151"><a href="#cb26-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-154"><a href="#cb26-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-155"><a href="#cb26-155" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> go.Figure()</span>
+<span id="cb26-156"><a href="#cb26-156" aria-hidden="true" tabindex="-1"></a>kmf <span class="op">=</span> KaplanMeierFitter()</span>
+<span id="cb26-157"><a href="#cb26-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-158"><a href="#cb26-158" aria-hidden="true" tabindex="-1"></a><span class="co"># Only unique decades</span></span>
+<span id="cb26-159"><a href="#cb26-159" aria-hidden="true" tabindex="-1"></a>decades <span class="op">=</span> <span class="bu">sorted</span>(df[<span class="st">'Decade'</span>].dropna().unique())</span>
+<span id="cb26-160"><a href="#cb26-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-161"><a href="#cb26-161" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, decade <span class="kw">in</span> <span class="bu">enumerate</span>(decades):</span>
+<span id="cb26-162"><a href="#cb26-162" aria-hidden="true" tabindex="-1"></a>    group <span class="op">=</span> df[df[<span class="st">'Decade'</span>] <span class="op">==</span> decade]</span>
+<span id="cb26-163"><a href="#cb26-163" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(group) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb26-164"><a href="#cb26-164" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb26-165"><a href="#cb26-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-166"><a href="#cb26-166" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fit Kaplan-Meier curve</span></span>
+<span id="cb26-167"><a href="#cb26-167" aria-hidden="true" tabindex="-1"></a>    kmf.fit(group[<span class="st">"Weeks in Top Ten"</span>], event_observed<span class="op">=</span>[<span class="dv">1</span>]<span class="op">*</span><span class="bu">len</span>(group))</span>
+<span id="cb26-168"><a href="#cb26-168" aria-hidden="true" tabindex="-1"></a>    surv <span class="op">=</span> kmf.survival_function_.reset_index()</span>
+<span id="cb26-169"><a href="#cb26-169" aria-hidden="true" tabindex="-1"></a>    surv.columns <span class="op">=</span> [<span class="st">"Weeks in Top Ten"</span>, <span class="st">"Probability of Staying"</span>]</span>
+<span id="cb26-170"><a href="#cb26-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-171"><a href="#cb26-171" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add survival curve</span></span>
+<span id="cb26-172"><a href="#cb26-172" aria-hidden="true" tabindex="-1"></a>    fig.add_trace(</span>
+<span id="cb26-173"><a href="#cb26-173" aria-hidden="true" tabindex="-1"></a>        go.Scatter(</span>
+<span id="cb26-174"><a href="#cb26-174" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>surv[<span class="st">"Weeks in Top Ten"</span>],</span>
+<span id="cb26-175"><a href="#cb26-175" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>surv[<span class="st">"Probability of Staying"</span>],</span>
+<span id="cb26-176"><a href="#cb26-176" aria-hidden="true" tabindex="-1"></a>            mode<span class="op">=</span><span class="st">"lines"</span>,</span>
+<span id="cb26-177"><a href="#cb26-177" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span><span class="bu">str</span>(decade),</span>
+<span id="cb26-178"><a href="#cb26-178" aria-hidden="true" tabindex="-1"></a>            line<span class="op">=</span><span class="bu">dict</span>(width<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb26-179"><a href="#cb26-179" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb26-180"><a href="#cb26-180" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-181"><a href="#cb26-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-182"><a href="#cb26-182" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Automatically pick evenly spaced points along the middle 80% of the curve</span></span>
+<span id="cb26-183"><a href="#cb26-183" aria-hidden="true" tabindex="-1"></a>    n_labels <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb26-184"><a href="#cb26-184" aria-hidden="true" tabindex="-1"></a>    start_idx <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(surv) <span class="op">*</span> <span class="fl">0.3</span>)   <span class="co"># skip first 10%</span></span>
+<span id="cb26-185"><a href="#cb26-185" aria-hidden="true" tabindex="-1"></a>    end_idx <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(surv) <span class="op">*</span> <span class="fl">0.95</span>)     <span class="co"># skip last 10%</span></span>
+<span id="cb26-186"><a href="#cb26-186" aria-hidden="true" tabindex="-1"></a>    indices <span class="op">=</span> np.linspace(start_idx, end_idx, n_labels, dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb26-187"><a href="#cb26-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-188"><a href="#cb26-188" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j, idx <span class="kw">in</span> <span class="bu">enumerate</span>(indices):</span>
+<span id="cb26-189"><a href="#cb26-189" aria-hidden="true" tabindex="-1"></a>        <span class="co"># stagger labels vertically to reduce overlap</span></span>
+<span id="cb26-190"><a href="#cb26-190" aria-hidden="true" tabindex="-1"></a>        y_offset <span class="op">=</span> <span class="dv">15</span> <span class="op">*</span> (i <span class="op">-</span> <span class="bu">len</span>(decades)<span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> (j <span class="op">-</span> (n_labels<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb26-191"><a href="#cb26-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-192"><a href="#cb26-192" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add annotation once per point</span></span>
+<span id="cb26-193"><a href="#cb26-193" aria-hidden="true" tabindex="-1"></a>        fig.add_annotation(</span>
+<span id="cb26-194"><a href="#cb26-194" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>surv[<span class="st">"Weeks in Top Ten"</span>].iloc[idx],</span>
+<span id="cb26-195"><a href="#cb26-195" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>surv[<span class="st">"Probability of Staying"</span>].iloc[idx],</span>
+<span id="cb26-196"><a href="#cb26-196" aria-hidden="true" tabindex="-1"></a>            text<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>decade<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb26-197"><a href="#cb26-197" aria-hidden="true" tabindex="-1"></a>            showarrow<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb26-198"><a href="#cb26-198" aria-hidden="true" tabindex="-1"></a>            arrowhead<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb26-199"><a href="#cb26-199" aria-hidden="true" tabindex="-1"></a>            font<span class="op">=</span><span class="bu">dict</span>(size<span class="op">=</span><span class="dv">12</span>),</span>
+<span id="cb26-200"><a href="#cb26-200" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb26-201"><a href="#cb26-201" aria-hidden="true" tabindex="-1"></a>            ay<span class="op">=-</span>y_offset</span>
+<span id="cb26-202"><a href="#cb26-202" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb26-203"><a href="#cb26-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-204"><a href="#cb26-204" aria-hidden="true" tabindex="-1"></a><span class="co"># Layout</span></span>
+<span id="cb26-205"><a href="#cb26-205" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
+<span id="cb26-206"><a href="#cb26-206" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Survival Curves of Billboard Top Ten Singles by Decade"</span>,</span>
+<span id="cb26-207"><a href="#cb26-207" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-208"><a href="#cb26-208" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">"Probability of Staying in Top Ten"</span>,</span>
+<span id="cb26-209"><a href="#cb26-209" aria-hidden="true" tabindex="-1"></a>    yaxis<span class="op">=</span><span class="bu">dict</span>(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>]),</span>
+<span id="cb26-210"><a href="#cb26-210" aria-hidden="true" tabindex="-1"></a>    showlegend<span class="op">=</span><span class="va">True</span></span>
+<span id="cb26-211"><a href="#cb26-211" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-212"><a href="#cb26-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-213"><a href="#cb26-213" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-214"><a href="#cb26-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-215"><a href="#cb26-215" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-216"><a href="#cb26-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-217"><a href="#cb26-217" aria-hidden="true" tabindex="-1"></a>This section explores the distribution and trends of peak chart positions for songs in the Billboard Top Ten. It examines how often songs reach each peak position, and analyzes changes in average peak positions over decades and years. The visualizations help reveal whether songs are more likely to reach higher or lower peaks over time, and provide insight into the competitiveness of the charts across different eras. Overall it seems that peak position competitiveness remains mostly similar.</span>
+<span id="cb26-217"><a href="#cb26-217" aria-hidden="true" tabindex="-1"></a><span class="fu"># Peak Positions</span></span>
 <span id="cb26-218"><a href="#cb26-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-219"><a href="#cb26-219" aria-hidden="true" tabindex="-1"></a><span class="fu">## Distribution of Peak Positions</span></span>
+<span id="cb26-219"><a href="#cb26-219" aria-hidden="true" tabindex="-1"></a>This section explores the distribution and trends of peak chart positions for songs in the Billboard Top Ten. It examines how often songs reach each peak position, and analyzes changes in average peak positions over decades and years. The visualizations help reveal whether songs are more likely to reach higher or lower peaks over time, and provide insight into the competitiveness of the charts across different eras. Overall it seems that peak position competitiveness remains mostly similar.</span>
 <span id="cb26-220"><a href="#cb26-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-223"><a href="#cb26-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-224"><a href="#cb26-224" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb26-225"><a href="#cb26-225" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'Peak'</span>].value_counts().sort_index().reset_index(),</span>
-<span id="cb26-226"><a href="#cb26-226" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">'Peak'</span>,</span>
-<span id="cb26-227"><a href="#cb26-227" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">'count'</span>,</span>
-<span id="cb26-228"><a href="#cb26-228" aria-hidden="true" tabindex="-1"></a>  text_auto<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb26-229"><a href="#cb26-229" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Overall Distribution of Peak Positions"</span></span>
-<span id="cb26-230"><a href="#cb26-230" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-231"><a href="#cb26-231" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-232"><a href="#cb26-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-233"><a href="#cb26-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-234"><a href="#cb26-234" aria-hidden="true" tabindex="-1"></a><span class="fu">## Average Peak by Decade</span></span>
+<span id="cb26-221"><a href="#cb26-221" aria-hidden="true" tabindex="-1"></a><span class="fu">## Distribution of Peak Positions</span></span>
+<span id="cb26-222"><a href="#cb26-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-225"><a href="#cb26-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-226"><a href="#cb26-226" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb26-227"><a href="#cb26-227" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'Peak'</span>].value_counts().sort_index().reset_index(),</span>
+<span id="cb26-228"><a href="#cb26-228" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">'Peak'</span>,</span>
+<span id="cb26-229"><a href="#cb26-229" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">'count'</span>,</span>
+<span id="cb26-230"><a href="#cb26-230" aria-hidden="true" tabindex="-1"></a>  text_auto<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb26-231"><a href="#cb26-231" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Overall Distribution of Peak Positions"</span></span>
+<span id="cb26-232"><a href="#cb26-232" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-233"><a href="#cb26-233" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-234"><a href="#cb26-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-235"><a href="#cb26-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-238"><a href="#cb26-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-239"><a href="#cb26-239" aria-hidden="true" tabindex="-1"></a>decade_stats <span class="op">=</span> df.groupby(<span class="st">'Decade'</span>, as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'Peak'</span>].mean()</span>
-<span id="cb26-240"><a href="#cb26-240" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb26-241"><a href="#cb26-241" aria-hidden="true" tabindex="-1"></a>  decade_stats,</span>
-<span id="cb26-242"><a href="#cb26-242" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">'Decade'</span>,</span>
-<span id="cb26-243"><a href="#cb26-243" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">'Peak'</span>,</span>
-<span id="cb26-244"><a href="#cb26-244" aria-hidden="true" tabindex="-1"></a>  text_auto<span class="op">=</span><span class="st">'.2f'</span>,</span>
-<span id="cb26-245"><a href="#cb26-245" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Average Peak Position in Top Ten by Decade"</span></span>
-<span id="cb26-246"><a href="#cb26-246" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-247"><a href="#cb26-247" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-248"><a href="#cb26-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-249"><a href="#cb26-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-250"><a href="#cb26-250" aria-hidden="true" tabindex="-1"></a><span class="fu">## Average Peak by Year</span></span>
+<span id="cb26-236"><a href="#cb26-236" aria-hidden="true" tabindex="-1"></a><span class="fu">## Average Peak by Decade</span></span>
+<span id="cb26-237"><a href="#cb26-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-240"><a href="#cb26-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-241"><a href="#cb26-241" aria-hidden="true" tabindex="-1"></a>decade_stats <span class="op">=</span> df.groupby(<span class="st">'Decade'</span>, as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'Peak'</span>].mean()</span>
+<span id="cb26-242"><a href="#cb26-242" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb26-243"><a href="#cb26-243" aria-hidden="true" tabindex="-1"></a>  decade_stats,</span>
+<span id="cb26-244"><a href="#cb26-244" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">'Decade'</span>,</span>
+<span id="cb26-245"><a href="#cb26-245" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">'Peak'</span>,</span>
+<span id="cb26-246"><a href="#cb26-246" aria-hidden="true" tabindex="-1"></a>  text_auto<span class="op">=</span><span class="st">'.2f'</span>,</span>
+<span id="cb26-247"><a href="#cb26-247" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Average Peak Position in Top Ten by Decade"</span></span>
+<span id="cb26-248"><a href="#cb26-248" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-249"><a href="#cb26-249" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-250"><a href="#cb26-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-251"><a href="#cb26-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-254"><a href="#cb26-254" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-255"><a href="#cb26-255" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> df.groupby(<span class="st">"Year"</span>)[<span class="st">"Peak"</span>].mean().reset_index()</span>
-<span id="cb26-256"><a href="#cb26-256" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(</span>
-<span id="cb26-257"><a href="#cb26-257" aria-hidden="true" tabindex="-1"></a>  trend,</span>
-<span id="cb26-258"><a href="#cb26-258" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Year"</span>,</span>
-<span id="cb26-259"><a href="#cb26-259" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Peak"</span>,</span>
-<span id="cb26-260"><a href="#cb26-260" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Average Peak Position in Top Ten Over Time Per Year"</span>,</span>
-<span id="cb26-261"><a href="#cb26-261" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"Peak"</span>: <span class="st">"Avg Peak Position"</span>, <span class="st">"Year"</span>: <span class="st">"Year"</span>}</span>
-<span id="cb26-262"><a href="#cb26-262" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-263"><a href="#cb26-263" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-264"><a href="#cb26-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-265"><a href="#cb26-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-266"><a href="#cb26-266" aria-hidden="true" tabindex="-1"></a><span class="fu"># Longevity by Peak Position</span></span>
+<span id="cb26-252"><a href="#cb26-252" aria-hidden="true" tabindex="-1"></a><span class="fu">## Average Peak by Year</span></span>
+<span id="cb26-253"><a href="#cb26-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-256"><a href="#cb26-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-257"><a href="#cb26-257" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> df.groupby(<span class="st">"Year"</span>)[<span class="st">"Peak"</span>].mean().reset_index()</span>
+<span id="cb26-258"><a href="#cb26-258" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(</span>
+<span id="cb26-259"><a href="#cb26-259" aria-hidden="true" tabindex="-1"></a>  trend,</span>
+<span id="cb26-260"><a href="#cb26-260" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb26-261"><a href="#cb26-261" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Peak"</span>,</span>
+<span id="cb26-262"><a href="#cb26-262" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Average Peak Position in Top Ten Over Time Per Year"</span>,</span>
+<span id="cb26-263"><a href="#cb26-263" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"Peak"</span>: <span class="st">"Avg Peak Position"</span>, <span class="st">"Year"</span>: <span class="st">"Year"</span>}</span>
+<span id="cb26-264"><a href="#cb26-264" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-265"><a href="#cb26-265" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-266"><a href="#cb26-266" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-267"><a href="#cb26-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-268"><a href="#cb26-268" aria-hidden="true" tabindex="-1"></a>This section examines how the longevity of a song in the Top Ten relates to its peak chart position. By analyzing the average number of weeks songs spend in the Top Ten for each peak position (from #1 to #10), we can see whether songs that reach higher peaks tend to have longer or shorter chart runs. This helps reveal if top-performing songs dominate the charts for longer periods, or if lower-peaking songs can also achieve significant longevity.</span>
+<span id="cb26-268"><a href="#cb26-268" aria-hidden="true" tabindex="-1"></a><span class="fu"># Longevity by Peak Position</span></span>
 <span id="cb26-269"><a href="#cb26-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-272"><a href="#cb26-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-273"><a href="#cb26-273" aria-hidden="true" tabindex="-1"></a>longevity_by_peak <span class="op">=</span> df.groupby(<span class="st">"Peak"</span>)[<span class="st">"Weeks in Top Ten"</span>].mean().reset_index()</span>
-<span id="cb26-274"><a href="#cb26-274" aria-hidden="true" tabindex="-1"></a>longevity_by_peak <span class="op">=</span> longevity_by_peak.sort_values(<span class="st">"Peak"</span>)</span>
-<span id="cb26-275"><a href="#cb26-275" aria-hidden="true" tabindex="-1"></a>longevity_by_peak[<span class="st">"Weeks in Top Ten"</span>] <span class="op">=</span> longevity_by_peak[<span class="st">"Weeks in Top Ten"</span>].<span class="bu">round</span>(<span class="dv">1</span>)</span>
-<span id="cb26-276"><a href="#cb26-276" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb26-277"><a href="#cb26-277" aria-hidden="true" tabindex="-1"></a>  longevity_by_peak,</span>
-<span id="cb26-278"><a href="#cb26-278" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Peak"</span>,</span>
-<span id="cb26-279"><a href="#cb26-279" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-280"><a href="#cb26-280" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-281"><a href="#cb26-281" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"Peak"</span>: <span class="st">"Peak Position"</span>, <span class="st">"Weeks in Top Ten"</span>: <span class="st">"Avg Weeks"</span>},</span>
-<span id="cb26-282"><a href="#cb26-282" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Average Weeks in Top Ten by Peak Position"</span></span>
-<span id="cb26-283"><a href="#cb26-283" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-284"><a href="#cb26-284" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-285"><a href="#cb26-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-286"><a href="#cb26-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-287"><a href="#cb26-287" aria-hidden="true" tabindex="-1"></a><span class="fu"># Number of Entries per Year</span></span>
+<span id="cb26-270"><a href="#cb26-270" aria-hidden="true" tabindex="-1"></a>This section examines how the longevity of a song in the Top Ten relates to its peak chart position. By analyzing the average number of weeks songs spend in the Top Ten for each peak position (from #1 to #10), we can see whether songs that reach higher peaks tend to have longer or shorter chart runs. This helps reveal if top-performing songs dominate the charts for longer periods, or if lower-peaking songs can also achieve significant longevity.</span>
+<span id="cb26-271"><a href="#cb26-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-274"><a href="#cb26-274" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-275"><a href="#cb26-275" aria-hidden="true" tabindex="-1"></a>longevity_by_peak <span class="op">=</span> df.groupby(<span class="st">"Peak"</span>)[<span class="st">"Weeks in Top Ten"</span>].mean().reset_index()</span>
+<span id="cb26-276"><a href="#cb26-276" aria-hidden="true" tabindex="-1"></a>longevity_by_peak <span class="op">=</span> longevity_by_peak.sort_values(<span class="st">"Peak"</span>)</span>
+<span id="cb26-277"><a href="#cb26-277" aria-hidden="true" tabindex="-1"></a>longevity_by_peak[<span class="st">"Weeks in Top Ten"</span>] <span class="op">=</span> longevity_by_peak[<span class="st">"Weeks in Top Ten"</span>].<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb26-278"><a href="#cb26-278" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb26-279"><a href="#cb26-279" aria-hidden="true" tabindex="-1"></a>  longevity_by_peak,</span>
+<span id="cb26-280"><a href="#cb26-280" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Peak"</span>,</span>
+<span id="cb26-281"><a href="#cb26-281" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-282"><a href="#cb26-282" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-283"><a href="#cb26-283" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"Peak"</span>: <span class="st">"Peak Position"</span>, <span class="st">"Weeks in Top Ten"</span>: <span class="st">"Avg Weeks"</span>},</span>
+<span id="cb26-284"><a href="#cb26-284" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Average Weeks in Top Ten by Peak Position"</span></span>
+<span id="cb26-285"><a href="#cb26-285" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-286"><a href="#cb26-286" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-287"><a href="#cb26-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-288"><a href="#cb26-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-289"><a href="#cb26-289" aria-hidden="true" tabindex="-1"></a>This supplemental chart demonstarates the result of songs living longer in the top ten - as a result we are seeing less entries breaking into the top ten and removing older top ten hits.</span>
+<span id="cb26-289"><a href="#cb26-289" aria-hidden="true" tabindex="-1"></a><span class="fu"># Number of Entries per Year</span></span>
 <span id="cb26-290"><a href="#cb26-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-293"><a href="#cb26-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-294"><a href="#cb26-294" aria-hidden="true" tabindex="-1"></a>entries_per_year <span class="op">=</span> df.groupby(<span class="st">"Year"</span>)[<span class="st">"Single Name"</span>].count().reset_index()</span>
-<span id="cb26-295"><a href="#cb26-295" aria-hidden="true" tabindex="-1"></a>entries_per_year.rename(columns<span class="op">=</span>{<span class="st">"Single Name"</span>: <span class="st">"Count"</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb26-296"><a href="#cb26-296" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(</span>
-<span id="cb26-297"><a href="#cb26-297" aria-hidden="true" tabindex="-1"></a>  entries_per_year,</span>
-<span id="cb26-298"><a href="#cb26-298" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Year"</span>,</span>
-<span id="cb26-299"><a href="#cb26-299" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Count"</span>,</span>
-<span id="cb26-300"><a href="#cb26-300" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Number of Top Ten Entries per Year"</span>,</span>
-<span id="cb26-301"><a href="#cb26-301" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"Year"</span>: <span class="st">"Year"</span>, <span class="st">"Count"</span>: <span class="st">"Number of Entries"</span>}</span>
-<span id="cb26-302"><a href="#cb26-302" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-303"><a href="#cb26-303" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-304"><a href="#cb26-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-305"><a href="#cb26-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-306"><a href="#cb26-306" aria-hidden="true" tabindex="-1"></a><span class="fu"># Top Artists and One-Hit Wonders</span></span>
+<span id="cb26-291"><a href="#cb26-291" aria-hidden="true" tabindex="-1"></a>This supplemental chart demonstarates the result of songs living longer in the top ten - as a result we are seeing less entries breaking into the top ten and removing older top ten hits.</span>
+<span id="cb26-292"><a href="#cb26-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-295"><a href="#cb26-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-296"><a href="#cb26-296" aria-hidden="true" tabindex="-1"></a>entries_per_year <span class="op">=</span> df.groupby(<span class="st">"Year"</span>)[<span class="st">"Single Name"</span>].count().reset_index()</span>
+<span id="cb26-297"><a href="#cb26-297" aria-hidden="true" tabindex="-1"></a>entries_per_year.rename(columns<span class="op">=</span>{<span class="st">"Single Name"</span>: <span class="st">"Count"</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-298"><a href="#cb26-298" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(</span>
+<span id="cb26-299"><a href="#cb26-299" aria-hidden="true" tabindex="-1"></a>  entries_per_year,</span>
+<span id="cb26-300"><a href="#cb26-300" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb26-301"><a href="#cb26-301" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Count"</span>,</span>
+<span id="cb26-302"><a href="#cb26-302" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Number of Top Ten Entries per Year"</span>,</span>
+<span id="cb26-303"><a href="#cb26-303" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"Year"</span>: <span class="st">"Year"</span>, <span class="st">"Count"</span>: <span class="st">"Number of Entries"</span>}</span>
+<span id="cb26-304"><a href="#cb26-304" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-305"><a href="#cb26-305" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-306"><a href="#cb26-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-307"><a href="#cb26-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-308"><a href="#cb26-308" aria-hidden="true" tabindex="-1"></a>So which artists are we seeing occupy the most real estate on the charts?</span>
+<span id="cb26-308"><a href="#cb26-308" aria-hidden="true" tabindex="-1"></a><span class="fu"># Top Artists and One-Hit Wonders</span></span>
 <span id="cb26-309"><a href="#cb26-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-310"><a href="#cb26-310" aria-hidden="true" tabindex="-1"></a><span class="fu">## Top 10 Artists by Top Ten Entries</span></span>
+<span id="cb26-310"><a href="#cb26-310" aria-hidden="true" tabindex="-1"></a>So which artists are we seeing occupy the most real estate on the charts?</span>
 <span id="cb26-311"><a href="#cb26-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-314"><a href="#cb26-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-315"><a href="#cb26-315" aria-hidden="true" tabindex="-1"></a>top_artists <span class="op">=</span> df[<span class="st">"Artist(s)"</span>].value_counts().reset_index()</span>
-<span id="cb26-316"><a href="#cb26-316" aria-hidden="true" tabindex="-1"></a>top_artists.columns <span class="op">=</span> [<span class="st">"Artist"</span>, <span class="st">"Entries"</span>]</span>
-<span id="cb26-317"><a href="#cb26-317" aria-hidden="true" tabindex="-1"></a>top_artists <span class="op">=</span> top_artists.sort_values(<span class="st">"Entries"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
-<span id="cb26-318"><a href="#cb26-318" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb26-319"><a href="#cb26-319" aria-hidden="true" tabindex="-1"></a>  top_artists,</span>
-<span id="cb26-320"><a href="#cb26-320" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Entries"</span>,</span>
-<span id="cb26-321"><a href="#cb26-321" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Artist"</span>,</span>
-<span id="cb26-322"><a href="#cb26-322" aria-hidden="true" tabindex="-1"></a>  orientation<span class="op">=</span><span class="st">"h"</span>,</span>
-<span id="cb26-323"><a href="#cb26-323" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">"Entries"</span>,</span>
-<span id="cb26-324"><a href="#cb26-324" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Top Artists by Top Ten Entries"</span></span>
-<span id="cb26-325"><a href="#cb26-325" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-326"><a href="#cb26-326" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-327"><a href="#cb26-327" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-328"><a href="#cb26-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-329"><a href="#cb26-329" aria-hidden="true" tabindex="-1"></a><span class="fu">## Top 10 Artists by Top Ten Real Estate</span></span>
+<span id="cb26-312"><a href="#cb26-312" aria-hidden="true" tabindex="-1"></a><span class="fu">## Top 10 Artists by Top Ten Entries</span></span>
+<span id="cb26-313"><a href="#cb26-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-316"><a href="#cb26-316" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-317"><a href="#cb26-317" aria-hidden="true" tabindex="-1"></a>top_artists <span class="op">=</span> df[<span class="st">"Artist(s)"</span>].value_counts().reset_index()</span>
+<span id="cb26-318"><a href="#cb26-318" aria-hidden="true" tabindex="-1"></a>top_artists.columns <span class="op">=</span> [<span class="st">"Artist"</span>, <span class="st">"Entries"</span>]</span>
+<span id="cb26-319"><a href="#cb26-319" aria-hidden="true" tabindex="-1"></a>top_artists <span class="op">=</span> top_artists.sort_values(<span class="st">"Entries"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
+<span id="cb26-320"><a href="#cb26-320" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb26-321"><a href="#cb26-321" aria-hidden="true" tabindex="-1"></a>  top_artists,</span>
+<span id="cb26-322"><a href="#cb26-322" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Entries"</span>,</span>
+<span id="cb26-323"><a href="#cb26-323" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Artist"</span>,</span>
+<span id="cb26-324"><a href="#cb26-324" aria-hidden="true" tabindex="-1"></a>  orientation<span class="op">=</span><span class="st">"h"</span>,</span>
+<span id="cb26-325"><a href="#cb26-325" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">"Entries"</span>,</span>
+<span id="cb26-326"><a href="#cb26-326" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Top Artists by Top Ten Entries"</span></span>
+<span id="cb26-327"><a href="#cb26-327" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-328"><a href="#cb26-328" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-329"><a href="#cb26-329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-330"><a href="#cb26-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-331"><a href="#cb26-331" aria-hidden="true" tabindex="-1"></a>This chart shows the top artists by the total amount of weekly space they have occupied on the top ten charts </span>
+<span id="cb26-331"><a href="#cb26-331" aria-hidden="true" tabindex="-1"></a><span class="fu">## Top 10 Artists by Top Ten Real Estate</span></span>
 <span id="cb26-332"><a href="#cb26-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-335"><a href="#cb26-335" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-336"><a href="#cb26-336" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total weeks in Top Ten for each artist</span></span>
-<span id="cb26-337"><a href="#cb26-337" aria-hidden="true" tabindex="-1"></a>artist_real_estate <span class="op">=</span> df.groupby(<span class="st">"Artist(s)"</span>)[<span class="st">"Weeks in Top Ten"</span>].<span class="bu">sum</span>().reset_index()</span>
-<span id="cb26-338"><a href="#cb26-338" aria-hidden="true" tabindex="-1"></a>artist_real_estate <span class="op">=</span> artist_real_estate.sort_values(<span class="st">"Weeks in Top Ten"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
-<span id="cb26-339"><a href="#cb26-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-340"><a href="#cb26-340" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot horizontal bar chart</span></span>
-<span id="cb26-341"><a href="#cb26-341" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb26-342"><a href="#cb26-342" aria-hidden="true" tabindex="-1"></a>    artist_real_estate,</span>
-<span id="cb26-343"><a href="#cb26-343" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-344"><a href="#cb26-344" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Artist(s)"</span>,</span>
-<span id="cb26-345"><a href="#cb26-345" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=</span><span class="st">"h"</span>,</span>
-<span id="cb26-346"><a href="#cb26-346" aria-hidden="true" tabindex="-1"></a>    text<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-347"><a href="#cb26-347" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Top 10 Artists by Total Weeks in Top Ten (Chart Real Estate)"</span></span>
-<span id="cb26-348"><a href="#cb26-348" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-349"><a href="#cb26-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-350"><a href="#cb26-350" aria-hidden="true" tabindex="-1"></a>fig.update_traces(textposition<span class="op">=</span><span class="st">"outside"</span>)</span>
-<span id="cb26-351"><a href="#cb26-351" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
-<span id="cb26-352"><a href="#cb26-352" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">"Total Weeks in Top Ten"</span>,</span>
-<span id="cb26-353"><a href="#cb26-353" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">"Artist"</span>,</span>
-<span id="cb26-354"><a href="#cb26-354" aria-hidden="true" tabindex="-1"></a>    yaxis<span class="op">=</span><span class="bu">dict</span>(autorange<span class="op">=</span><span class="st">"reversed"</span>)</span>
-<span id="cb26-355"><a href="#cb26-355" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-356"><a href="#cb26-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-357"><a href="#cb26-357" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-358"><a href="#cb26-358" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-359"><a href="#cb26-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-360"><a href="#cb26-360" aria-hidden="true" tabindex="-1"></a><span class="fu">## One-Hit Wonders</span></span>
+<span id="cb26-333"><a href="#cb26-333" aria-hidden="true" tabindex="-1"></a>This chart shows the top artists by the total amount of weekly space they have occupied on the top ten charts </span>
+<span id="cb26-334"><a href="#cb26-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-337"><a href="#cb26-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-338"><a href="#cb26-338" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total weeks in Top Ten for each artist</span></span>
+<span id="cb26-339"><a href="#cb26-339" aria-hidden="true" tabindex="-1"></a>artist_real_estate <span class="op">=</span> df.groupby(<span class="st">"Artist(s)"</span>)[<span class="st">"Weeks in Top Ten"</span>].<span class="bu">sum</span>().reset_index()</span>
+<span id="cb26-340"><a href="#cb26-340" aria-hidden="true" tabindex="-1"></a>artist_real_estate <span class="op">=</span> artist_real_estate.sort_values(<span class="st">"Weeks in Top Ten"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
+<span id="cb26-341"><a href="#cb26-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-342"><a href="#cb26-342" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot horizontal bar chart</span></span>
+<span id="cb26-343"><a href="#cb26-343" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb26-344"><a href="#cb26-344" aria-hidden="true" tabindex="-1"></a>    artist_real_estate,</span>
+<span id="cb26-345"><a href="#cb26-345" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-346"><a href="#cb26-346" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Artist(s)"</span>,</span>
+<span id="cb26-347"><a href="#cb26-347" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=</span><span class="st">"h"</span>,</span>
+<span id="cb26-348"><a href="#cb26-348" aria-hidden="true" tabindex="-1"></a>    text<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-349"><a href="#cb26-349" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Top 10 Artists by Total Weeks in Top Ten (Chart Real Estate)"</span></span>
+<span id="cb26-350"><a href="#cb26-350" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-351"><a href="#cb26-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-352"><a href="#cb26-352" aria-hidden="true" tabindex="-1"></a>fig.update_traces(textposition<span class="op">=</span><span class="st">"outside"</span>)</span>
+<span id="cb26-353"><a href="#cb26-353" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
+<span id="cb26-354"><a href="#cb26-354" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">"Total Weeks in Top Ten"</span>,</span>
+<span id="cb26-355"><a href="#cb26-355" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">"Artist"</span>,</span>
+<span id="cb26-356"><a href="#cb26-356" aria-hidden="true" tabindex="-1"></a>    yaxis<span class="op">=</span><span class="bu">dict</span>(autorange<span class="op">=</span><span class="st">"reversed"</span>)</span>
+<span id="cb26-357"><a href="#cb26-357" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-358"><a href="#cb26-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-359"><a href="#cb26-359" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-360"><a href="#cb26-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-361"><a href="#cb26-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-362"><a href="#cb26-362" aria-hidden="true" tabindex="-1"></a>Which artists make one entry on the top ten charts but never return?</span>
+<span id="cb26-362"><a href="#cb26-362" aria-hidden="true" tabindex="-1"></a><span class="fu">## One-Hit Wonders</span></span>
 <span id="cb26-363"><a href="#cb26-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-366"><a href="#cb26-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-367"><a href="#cb26-367" aria-hidden="true" tabindex="-1"></a>artist_song_counts <span class="op">=</span> df.groupby(<span class="st">"Artist(s)"</span>)[<span class="st">"Single Name"</span>].nunique()</span>
-<span id="cb26-368"><a href="#cb26-368" aria-hidden="true" tabindex="-1"></a>one_hit_pct <span class="op">=</span> (artist_song_counts <span class="op">==</span> <span class="dv">1</span>).mean() <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb26-369"><a href="#cb26-369" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"One-hit wonders (Artists that reach the top 10 only once): </span><span class="sc">{</span>one_hit_pct<span class="sc">:.1f}</span><span class="ss">% of artists"</span>)</span>
-<span id="cb26-370"><a href="#cb26-370" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-371"><a href="#cb26-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-372"><a href="#cb26-372" aria-hidden="true" tabindex="-1"></a><span class="fu"># Seasonality: Top Ten Entries by Month and Decade</span></span>
+<span id="cb26-364"><a href="#cb26-364" aria-hidden="true" tabindex="-1"></a>Which artists make one entry on the top ten charts but never return?</span>
+<span id="cb26-365"><a href="#cb26-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-368"><a href="#cb26-368" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-369"><a href="#cb26-369" aria-hidden="true" tabindex="-1"></a>artist_song_counts <span class="op">=</span> df.groupby(<span class="st">"Artist(s)"</span>)[<span class="st">"Single Name"</span>].nunique()</span>
+<span id="cb26-370"><a href="#cb26-370" aria-hidden="true" tabindex="-1"></a>one_hit_pct <span class="op">=</span> (artist_song_counts <span class="op">==</span> <span class="dv">1</span>).mean() <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb26-371"><a href="#cb26-371" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"One-hit wonders (Artists that reach the top 10 only once): </span><span class="sc">{</span>one_hit_pct<span class="sc">:.1f}</span><span class="ss">% of artists"</span>)</span>
+<span id="cb26-372"><a href="#cb26-372" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-373"><a href="#cb26-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-374"><a href="#cb26-374" aria-hidden="true" tabindex="-1"></a>Do more songs enter the top ten during certain months compared to other months? (Holiday Songs Excluded) </span>
+<span id="cb26-374"><a href="#cb26-374" aria-hidden="true" tabindex="-1"></a><span class="fu"># Seasonality: Top Ten Entries by Month and Decade</span></span>
 <span id="cb26-375"><a href="#cb26-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-378"><a href="#cb26-378" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-379"><a href="#cb26-379" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Month'</span>] <span class="op">=</span> df[<span class="st">'Top Ten Entry Date'</span>].dt.month</span>
-<span id="cb26-380"><a href="#cb26-380" aria-hidden="true" tabindex="-1"></a>entries_by_month_decade <span class="op">=</span> df.groupby([<span class="st">'Month'</span>, <span class="st">'Decade'</span>])[<span class="st">'Single Name'</span>].count().reset_index()</span>
-<span id="cb26-381"><a href="#cb26-381" aria-hidden="true" tabindex="-1"></a>entries_by_month_decade.rename(columns<span class="op">=</span>{<span class="st">"Single Name"</span>: <span class="st">"Entries"</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb26-382"><a href="#cb26-382" aria-hidden="true" tabindex="-1"></a>entries_by_month_decade[<span class="st">'Month Name'</span>] <span class="op">=</span> entries_by_month_decade[<span class="st">'Month'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: calendar.month_abbr[x])</span>
-<span id="cb26-383"><a href="#cb26-383" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
-<span id="cb26-384"><a href="#cb26-384" aria-hidden="true" tabindex="-1"></a>  entries_by_month_decade,</span>
-<span id="cb26-385"><a href="#cb26-385" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">'Month Name'</span>,</span>
-<span id="cb26-386"><a href="#cb26-386" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">'Entries'</span>,</span>
-<span id="cb26-387"><a href="#cb26-387" aria-hidden="true" tabindex="-1"></a>  color<span class="op">=</span><span class="st">'Decade'</span>,</span>
-<span id="cb26-388"><a href="#cb26-388" aria-hidden="true" tabindex="-1"></a>  barmode<span class="op">=</span><span class="st">'group'</span>,</span>
-<span id="cb26-389"><a href="#cb26-389" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">'Entries'</span>,</span>
-<span id="cb26-390"><a href="#cb26-390" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">'Top Ten Entries by Month and Decade'</span>,</span>
-<span id="cb26-391"><a href="#cb26-391" aria-hidden="true" tabindex="-1"></a>  height<span class="op">=</span><span class="dv">700</span></span>
-<span id="cb26-392"><a href="#cb26-392" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-393"><a href="#cb26-393" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-394"><a href="#cb26-394" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-395"><a href="#cb26-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-396"><a href="#cb26-396" aria-hidden="true" tabindex="-1"></a><span class="fu"># Song Trajectory: Lag to Peak</span></span>
+<span id="cb26-376"><a href="#cb26-376" aria-hidden="true" tabindex="-1"></a>Do more songs enter the top ten during certain months compared to other months? (Holiday Songs Excluded) </span>
+<span id="cb26-377"><a href="#cb26-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-380"><a href="#cb26-380" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-381"><a href="#cb26-381" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Month'</span>] <span class="op">=</span> df[<span class="st">'Top Ten Entry Date'</span>].dt.month</span>
+<span id="cb26-382"><a href="#cb26-382" aria-hidden="true" tabindex="-1"></a>entries_by_month_decade <span class="op">=</span> df.groupby([<span class="st">'Month'</span>, <span class="st">'Decade'</span>])[<span class="st">'Single Name'</span>].count().reset_index()</span>
+<span id="cb26-383"><a href="#cb26-383" aria-hidden="true" tabindex="-1"></a>entries_by_month_decade.rename(columns<span class="op">=</span>{<span class="st">"Single Name"</span>: <span class="st">"Entries"</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-384"><a href="#cb26-384" aria-hidden="true" tabindex="-1"></a>entries_by_month_decade[<span class="st">'Month Name'</span>] <span class="op">=</span> entries_by_month_decade[<span class="st">'Month'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: calendar.month_abbr[x])</span>
+<span id="cb26-385"><a href="#cb26-385" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb26-386"><a href="#cb26-386" aria-hidden="true" tabindex="-1"></a>  entries_by_month_decade,</span>
+<span id="cb26-387"><a href="#cb26-387" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">'Month Name'</span>,</span>
+<span id="cb26-388"><a href="#cb26-388" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">'Entries'</span>,</span>
+<span id="cb26-389"><a href="#cb26-389" aria-hidden="true" tabindex="-1"></a>  color<span class="op">=</span><span class="st">'Decade'</span>,</span>
+<span id="cb26-390"><a href="#cb26-390" aria-hidden="true" tabindex="-1"></a>  barmode<span class="op">=</span><span class="st">'group'</span>,</span>
+<span id="cb26-391"><a href="#cb26-391" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">'Entries'</span>,</span>
+<span id="cb26-392"><a href="#cb26-392" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">'Top Ten Entries by Month and Decade'</span>,</span>
+<span id="cb26-393"><a href="#cb26-393" aria-hidden="true" tabindex="-1"></a>  height<span class="op">=</span><span class="dv">700</span></span>
+<span id="cb26-394"><a href="#cb26-394" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-395"><a href="#cb26-395" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-396"><a href="#cb26-396" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-397"><a href="#cb26-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-398"><a href="#cb26-398" aria-hidden="true" tabindex="-1"></a>The "Lag to Peak" metric measures the number of days between a song's entry into the Top Ten and the date it reaches its highest chart position. This helps identify songs that quickly shoot to their peak versus those that climb more gradually—so-called "sleeper hits." The distribution below shows that while many songs reach their peak soon after entering the Top Ten, a notable subset takes several weeks or even months to peak, reflecting different promotional strategies, viral trends, or seasonal effects.</span>
+<span id="cb26-398"><a href="#cb26-398" aria-hidden="true" tabindex="-1"></a><span class="fu"># Song Trajectory: Lag to Peak</span></span>
 <span id="cb26-399"><a href="#cb26-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-402"><a href="#cb26-402" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-403"><a href="#cb26-403" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Lag to Peak"</span>] <span class="op">=</span> (df[<span class="st">"Peak Date"</span>] <span class="op">-</span> df[<span class="st">"Top Ten Entry Date"</span>]).dt.days</span>
-<span id="cb26-404"><a href="#cb26-404" aria-hidden="true" tabindex="-1"></a>lag_data <span class="op">=</span> df[<span class="st">"Lag to Peak"</span>].dropna()</span>
-<span id="cb26-405"><a href="#cb26-405" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(</span>
-<span id="cb26-406"><a href="#cb26-406" aria-hidden="true" tabindex="-1"></a>  lag_data,</span>
-<span id="cb26-407"><a href="#cb26-407" aria-hidden="true" tabindex="-1"></a>  nbins<span class="op">=</span><span class="dv">30</span>,</span>
-<span id="cb26-408"><a href="#cb26-408" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Distribution of Days to Peak Position"</span>,</span>
-<span id="cb26-409"><a href="#cb26-409" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"value"</span>: <span class="st">"Days"</span>, <span class="st">"count"</span>: <span class="st">"Count"</span>}</span>
-<span id="cb26-410"><a href="#cb26-410" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-411"><a href="#cb26-411" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-412"><a href="#cb26-412" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-413"><a href="#cb26-413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-414"><a href="#cb26-414" aria-hidden="true" tabindex="-1"></a><span class="fu">## Top 10 Songs with Greatest Lag to Peak</span></span>
+<span id="cb26-400"><a href="#cb26-400" aria-hidden="true" tabindex="-1"></a>The "Lag to Peak" metric measures the number of days between a song's entry into the Top Ten and the date it reaches its highest chart position. This helps identify songs that quickly shoot to their peak versus those that climb more gradually—so-called "sleeper hits." The distribution below shows that while many songs reach their peak soon after entering the Top Ten, a notable subset takes several weeks or even months to peak, reflecting different promotional strategies, viral trends, or seasonal effects.</span>
+<span id="cb26-401"><a href="#cb26-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-404"><a href="#cb26-404" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-405"><a href="#cb26-405" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Lag to Peak"</span>] <span class="op">=</span> (df[<span class="st">"Peak Date"</span>] <span class="op">-</span> df[<span class="st">"Top Ten Entry Date"</span>]).dt.days</span>
+<span id="cb26-406"><a href="#cb26-406" aria-hidden="true" tabindex="-1"></a>lag_data <span class="op">=</span> df[<span class="st">"Lag to Peak"</span>].dropna()</span>
+<span id="cb26-407"><a href="#cb26-407" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.histogram(</span>
+<span id="cb26-408"><a href="#cb26-408" aria-hidden="true" tabindex="-1"></a>  lag_data,</span>
+<span id="cb26-409"><a href="#cb26-409" aria-hidden="true" tabindex="-1"></a>  nbins<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb26-410"><a href="#cb26-410" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Distribution of Days to Peak Position"</span>,</span>
+<span id="cb26-411"><a href="#cb26-411" aria-hidden="true" tabindex="-1"></a>  labels<span class="op">=</span>{<span class="st">"value"</span>: <span class="st">"Days"</span>, <span class="st">"count"</span>: <span class="st">"Count"</span>}</span>
+<span id="cb26-412"><a href="#cb26-412" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-413"><a href="#cb26-413" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-414"><a href="#cb26-414" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-415"><a href="#cb26-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-418"><a href="#cb26-418" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-419"><a href="#cb26-419" aria-hidden="true" tabindex="-1"></a>top_lag <span class="op">=</span> df.nlargest(<span class="dv">10</span>, <span class="st">"Lag to Peak"</span>)[[<span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>, <span class="st">"Lag to Peak"</span>, <span class="st">"Top Ten Entry Date"</span>, <span class="st">"Peak Date"</span>]]</span>
-<span id="cb26-420"><a href="#cb26-420" aria-hidden="true" tabindex="-1"></a>top_lag[<span class="st">'Label'</span>] <span class="op">=</span> top_lag[<span class="st">"Single Name"</span>] <span class="op">+</span> <span class="st">" – "</span> <span class="op">+</span> top_lag[<span class="st">"Artist(s)"</span>]</span>
-<span id="cb26-421"><a href="#cb26-421" aria-hidden="true" tabindex="-1"></a>fig_top_lag <span class="op">=</span> px.bar(</span>
-<span id="cb26-422"><a href="#cb26-422" aria-hidden="true" tabindex="-1"></a>  top_lag,</span>
-<span id="cb26-423"><a href="#cb26-423" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Lag to Peak"</span>,</span>
-<span id="cb26-424"><a href="#cb26-424" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Label"</span>,</span>
-<span id="cb26-425"><a href="#cb26-425" aria-hidden="true" tabindex="-1"></a>  orientation<span class="op">=</span><span class="st">'h'</span>,</span>
-<span id="cb26-426"><a href="#cb26-426" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">"Lag to Peak"</span>,</span>
-<span id="cb26-427"><a href="#cb26-427" aria-hidden="true" tabindex="-1"></a>  hover_data<span class="op">=</span>{</span>
-<span id="cb26-428"><a href="#cb26-428" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Lag to Peak"</span>: <span class="va">True</span>,</span>
-<span id="cb26-429"><a href="#cb26-429" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Top Ten Entry Date"</span>: <span class="va">True</span>,</span>
-<span id="cb26-430"><a href="#cb26-430" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Peak Date"</span>: <span class="va">True</span>,</span>
-<span id="cb26-431"><a href="#cb26-431" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Label"</span>: <span class="va">False</span></span>
-<span id="cb26-432"><a href="#cb26-432" aria-hidden="true" tabindex="-1"></a>  },</span>
-<span id="cb26-433"><a href="#cb26-433" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Top 10 Songs with Greatest Lag to Peak"</span></span>
-<span id="cb26-434"><a href="#cb26-434" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-435"><a href="#cb26-435" aria-hidden="true" tabindex="-1"></a>fig_top_lag.show()</span>
-<span id="cb26-436"><a href="#cb26-436" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-437"><a href="#cb26-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-438"><a href="#cb26-438" aria-hidden="true" tabindex="-1"></a><span class="fu"># Longest-Running Top Ten Songs</span></span>
+<span id="cb26-416"><a href="#cb26-416" aria-hidden="true" tabindex="-1"></a><span class="fu">## Top 10 Songs with Greatest Lag to Peak</span></span>
+<span id="cb26-417"><a href="#cb26-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-420"><a href="#cb26-420" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-421"><a href="#cb26-421" aria-hidden="true" tabindex="-1"></a>top_lag <span class="op">=</span> df.nlargest(<span class="dv">10</span>, <span class="st">"Lag to Peak"</span>)[[<span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>, <span class="st">"Lag to Peak"</span>, <span class="st">"Top Ten Entry Date"</span>, <span class="st">"Peak Date"</span>]]</span>
+<span id="cb26-422"><a href="#cb26-422" aria-hidden="true" tabindex="-1"></a>top_lag[<span class="st">'Label'</span>] <span class="op">=</span> top_lag[<span class="st">"Single Name"</span>] <span class="op">+</span> <span class="st">" – "</span> <span class="op">+</span> top_lag[<span class="st">"Artist(s)"</span>]</span>
+<span id="cb26-423"><a href="#cb26-423" aria-hidden="true" tabindex="-1"></a>fig_top_lag <span class="op">=</span> px.bar(</span>
+<span id="cb26-424"><a href="#cb26-424" aria-hidden="true" tabindex="-1"></a>  top_lag,</span>
+<span id="cb26-425"><a href="#cb26-425" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Lag to Peak"</span>,</span>
+<span id="cb26-426"><a href="#cb26-426" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Label"</span>,</span>
+<span id="cb26-427"><a href="#cb26-427" aria-hidden="true" tabindex="-1"></a>  orientation<span class="op">=</span><span class="st">'h'</span>,</span>
+<span id="cb26-428"><a href="#cb26-428" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">"Lag to Peak"</span>,</span>
+<span id="cb26-429"><a href="#cb26-429" aria-hidden="true" tabindex="-1"></a>  hover_data<span class="op">=</span>{</span>
+<span id="cb26-430"><a href="#cb26-430" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Lag to Peak"</span>: <span class="va">True</span>,</span>
+<span id="cb26-431"><a href="#cb26-431" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Top Ten Entry Date"</span>: <span class="va">True</span>,</span>
+<span id="cb26-432"><a href="#cb26-432" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Peak Date"</span>: <span class="va">True</span>,</span>
+<span id="cb26-433"><a href="#cb26-433" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Label"</span>: <span class="va">False</span></span>
+<span id="cb26-434"><a href="#cb26-434" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb26-435"><a href="#cb26-435" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Top 10 Songs with Greatest Lag to Peak"</span></span>
+<span id="cb26-436"><a href="#cb26-436" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-437"><a href="#cb26-437" aria-hidden="true" tabindex="-1"></a>fig_top_lag.show()</span>
+<span id="cb26-438"><a href="#cb26-438" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-439"><a href="#cb26-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-442"><a href="#cb26-442" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-443"><a href="#cb26-443" aria-hidden="true" tabindex="-1"></a>longest <span class="op">=</span> df.nlargest(<span class="dv">20</span>, <span class="st">"Weeks in Top Ten"</span>)[[<span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>, <span class="st">"Weeks in Top Ten"</span>]]</span>
-<span id="cb26-444"><a href="#cb26-444" aria-hidden="true" tabindex="-1"></a>longest[<span class="st">'Label'</span>] <span class="op">=</span> longest[<span class="st">"Single Name"</span>] <span class="op">+</span> <span class="st">" – "</span> <span class="op">+</span> longest[<span class="st">"Artist(s)"</span>]</span>
-<span id="cb26-445"><a href="#cb26-445" aria-hidden="true" tabindex="-1"></a>fig_longest <span class="op">=</span> px.bar(</span>
-<span id="cb26-446"><a href="#cb26-446" aria-hidden="true" tabindex="-1"></a>  longest,</span>
-<span id="cb26-447"><a href="#cb26-447" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-448"><a href="#cb26-448" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Label"</span>,</span>
-<span id="cb26-449"><a href="#cb26-449" aria-hidden="true" tabindex="-1"></a>  orientation<span class="op">=</span><span class="st">'h'</span>,</span>
-<span id="cb26-450"><a href="#cb26-450" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-451"><a href="#cb26-451" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Top 20 Longest-Running Top Ten Songs"</span></span>
-<span id="cb26-452"><a href="#cb26-452" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-453"><a href="#cb26-453" aria-hidden="true" tabindex="-1"></a>fig_longest.show()</span>
-<span id="cb26-454"><a href="#cb26-454" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-455"><a href="#cb26-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-456"><a href="#cb26-456" aria-hidden="true" tabindex="-1"></a><span class="fu"># Clustering Song Trajectories</span></span>
+<span id="cb26-440"><a href="#cb26-440" aria-hidden="true" tabindex="-1"></a><span class="fu"># Longest-Running Top Ten Songs</span></span>
+<span id="cb26-441"><a href="#cb26-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-444"><a href="#cb26-444" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-445"><a href="#cb26-445" aria-hidden="true" tabindex="-1"></a>longest <span class="op">=</span> df.nlargest(<span class="dv">20</span>, <span class="st">"Weeks in Top Ten"</span>)[[<span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>, <span class="st">"Weeks in Top Ten"</span>]]</span>
+<span id="cb26-446"><a href="#cb26-446" aria-hidden="true" tabindex="-1"></a>longest[<span class="st">'Label'</span>] <span class="op">=</span> longest[<span class="st">"Single Name"</span>] <span class="op">+</span> <span class="st">" – "</span> <span class="op">+</span> longest[<span class="st">"Artist(s)"</span>]</span>
+<span id="cb26-447"><a href="#cb26-447" aria-hidden="true" tabindex="-1"></a>fig_longest <span class="op">=</span> px.bar(</span>
+<span id="cb26-448"><a href="#cb26-448" aria-hidden="true" tabindex="-1"></a>  longest,</span>
+<span id="cb26-449"><a href="#cb26-449" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-450"><a href="#cb26-450" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Label"</span>,</span>
+<span id="cb26-451"><a href="#cb26-451" aria-hidden="true" tabindex="-1"></a>  orientation<span class="op">=</span><span class="st">'h'</span>,</span>
+<span id="cb26-452"><a href="#cb26-452" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-453"><a href="#cb26-453" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Top 20 Longest-Running Top Ten Songs"</span></span>
+<span id="cb26-454"><a href="#cb26-454" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-455"><a href="#cb26-455" aria-hidden="true" tabindex="-1"></a>fig_longest.show()</span>
+<span id="cb26-456"><a href="#cb26-456" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-457"><a href="#cb26-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-458"><a href="#cb26-458" aria-hidden="true" tabindex="-1"></a>This section uses K-means clustering to group songs based on their chart trajectory characteristics: "Lag to Peak" (how long it took to reach peak position), "Weeks in Top Ten" (overall longevity), and "Peak" (best chart position). By visualizing these clusters, we can identify distinct types of hits, such as instant chart-toppers, slow-burn "sleeper hits," and songs with brief or moderate success. The scatter plot below shows each song colored by its assigned cluster, helping to reveal patterns in how songs move through the Top Ten.</span>
+<span id="cb26-458"><a href="#cb26-458" aria-hidden="true" tabindex="-1"></a><span class="fu"># Clustering Song Trajectories</span></span>
 <span id="cb26-459"><a href="#cb26-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-462"><a href="#cb26-462" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-463"><a href="#cb26-463" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clustering_plotly(df, k<span class="op">=</span><span class="dv">4</span>):</span>
-<span id="cb26-464"><a href="#cb26-464" aria-hidden="true" tabindex="-1"></a>  features <span class="op">=</span> df[[<span class="st">"Lag to Peak"</span>, <span class="st">"Weeks in Top Ten"</span>, <span class="st">"Peak"</span>]].dropna()</span>
-<span id="cb26-465"><a href="#cb26-465" aria-hidden="true" tabindex="-1"></a>  km <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, random_state<span class="op">=</span><span class="dv">42</span>, n_init<span class="op">=</span><span class="dv">10</span>).fit(features)</span>
-<span id="cb26-466"><a href="#cb26-466" aria-hidden="true" tabindex="-1"></a>  df.loc[features.index, <span class="st">"Cluster"</span>] <span class="op">=</span> km.labels_.astype(<span class="bu">str</span>)</span>
-<span id="cb26-467"><a href="#cb26-467" aria-hidden="true" tabindex="-1"></a>  fig_scatter <span class="op">=</span> px.scatter(</span>
-<span id="cb26-468"><a href="#cb26-468" aria-hidden="true" tabindex="-1"></a>    df.loc[features.index],</span>
-<span id="cb26-469"><a href="#cb26-469" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Lag to Peak"</span>,</span>
-<span id="cb26-470"><a href="#cb26-470" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-471"><a href="#cb26-471" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"Cluster"</span>,</span>
-<span id="cb26-472"><a href="#cb26-472" aria-hidden="true" tabindex="-1"></a>    hover_data<span class="op">=</span>[<span class="st">"Peak"</span>, <span class="st">"Lag to Peak"</span>, <span class="st">"Weeks in Top Ten"</span>, <span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>],</span>
-<span id="cb26-473"><a href="#cb26-473" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"K-means Clustering of Songs"</span>,</span>
-<span id="cb26-474"><a href="#cb26-474" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">600</span></span>
-<span id="cb26-475"><a href="#cb26-475" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb26-476"><a href="#cb26-476" aria-hidden="true" tabindex="-1"></a>  fig_scatter.show()</span>
-<span id="cb26-477"><a href="#cb26-477" aria-hidden="true" tabindex="-1"></a>clustering_plotly(df, k<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb26-478"><a href="#cb26-478" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-479"><a href="#cb26-479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-480"><a href="#cb26-480" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sleeper Hits (Cluster 2)</span></span>
+<span id="cb26-460"><a href="#cb26-460" aria-hidden="true" tabindex="-1"></a>This section uses K-means clustering to group songs based on their chart trajectory characteristics: "Lag to Peak" (how long it took to reach peak position), "Weeks in Top Ten" (overall longevity), and "Peak" (best chart position). By visualizing these clusters, we can identify distinct types of hits, such as instant chart-toppers, slow-burn "sleeper hits," and songs with brief or moderate success. The scatter plot below shows each song colored by its assigned cluster, helping to reveal patterns in how songs move through the Top Ten.</span>
+<span id="cb26-461"><a href="#cb26-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-464"><a href="#cb26-464" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-465"><a href="#cb26-465" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clustering_plotly(df, k<span class="op">=</span><span class="dv">4</span>):</span>
+<span id="cb26-466"><a href="#cb26-466" aria-hidden="true" tabindex="-1"></a>  features <span class="op">=</span> df[[<span class="st">"Lag to Peak"</span>, <span class="st">"Weeks in Top Ten"</span>, <span class="st">"Peak"</span>]].dropna()</span>
+<span id="cb26-467"><a href="#cb26-467" aria-hidden="true" tabindex="-1"></a>  km <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, random_state<span class="op">=</span><span class="dv">42</span>, n_init<span class="op">=</span><span class="dv">10</span>).fit(features)</span>
+<span id="cb26-468"><a href="#cb26-468" aria-hidden="true" tabindex="-1"></a>  df.loc[features.index, <span class="st">"Cluster"</span>] <span class="op">=</span> km.labels_.astype(<span class="bu">str</span>)</span>
+<span id="cb26-469"><a href="#cb26-469" aria-hidden="true" tabindex="-1"></a>  fig_scatter <span class="op">=</span> px.scatter(</span>
+<span id="cb26-470"><a href="#cb26-470" aria-hidden="true" tabindex="-1"></a>    df.loc[features.index],</span>
+<span id="cb26-471"><a href="#cb26-471" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Lag to Peak"</span>,</span>
+<span id="cb26-472"><a href="#cb26-472" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-473"><a href="#cb26-473" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"Cluster"</span>,</span>
+<span id="cb26-474"><a href="#cb26-474" aria-hidden="true" tabindex="-1"></a>    hover_data<span class="op">=</span>[<span class="st">"Peak"</span>, <span class="st">"Lag to Peak"</span>, <span class="st">"Weeks in Top Ten"</span>, <span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>],</span>
+<span id="cb26-475"><a href="#cb26-475" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"K-means Clustering of Songs"</span>,</span>
+<span id="cb26-476"><a href="#cb26-476" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">600</span></span>
+<span id="cb26-477"><a href="#cb26-477" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb26-478"><a href="#cb26-478" aria-hidden="true" tabindex="-1"></a>  fig_scatter.show()</span>
+<span id="cb26-479"><a href="#cb26-479" aria-hidden="true" tabindex="-1"></a>clustering_plotly(df, k<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb26-480"><a href="#cb26-480" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-481"><a href="#cb26-481" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-484"><a href="#cb26-484" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-485"><a href="#cb26-485" aria-hidden="true" tabindex="-1"></a>cluster_2_songs <span class="op">=</span> df[df[<span class="st">"Cluster"</span>] <span class="op">==</span> <span class="st">"2"</span>][[<span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>, <span class="st">"Weeks in Top Ten"</span>, <span class="st">"Lag to Peak"</span>, <span class="st">"Peak"</span>]]</span>
-<span id="cb26-486"><a href="#cb26-486" aria-hidden="true" tabindex="-1"></a>cluster_2_songs_sorted <span class="op">=</span> cluster_2_songs.sort_values(by<span class="op">=</span>[<span class="st">"Peak"</span>, <span class="st">"Weeks in Top Ten"</span>], ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>])</span>
-<span id="cb26-487"><a href="#cb26-487" aria-hidden="true" tabindex="-1"></a>cluster_2_songs_sorted[<span class="st">'Label'</span>] <span class="op">=</span> cluster_2_songs_sorted[<span class="st">"Single Name"</span>] <span class="op">+</span> <span class="st">" – "</span> <span class="op">+</span> cluster_2_songs_sorted[<span class="st">"Artist(s)"</span>]</span>
-<span id="cb26-488"><a href="#cb26-488" aria-hidden="true" tabindex="-1"></a>fig_cluster2 <span class="op">=</span> px.bar(</span>
-<span id="cb26-489"><a href="#cb26-489" aria-hidden="true" tabindex="-1"></a>  cluster_2_songs_sorted,</span>
-<span id="cb26-490"><a href="#cb26-490" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-491"><a href="#cb26-491" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Label"</span>,</span>
-<span id="cb26-492"><a href="#cb26-492" aria-hidden="true" tabindex="-1"></a>  orientation<span class="op">=</span><span class="st">'h'</span>,</span>
-<span id="cb26-493"><a href="#cb26-493" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
-<span id="cb26-494"><a href="#cb26-494" aria-hidden="true" tabindex="-1"></a>  hover_data<span class="op">=</span>[<span class="st">"Peak"</span>, <span class="st">"Lag to Peak"</span>],</span>
-<span id="cb26-495"><a href="#cb26-495" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Sleeper Hits (Songs that Peaked Late but Stayed Long)"</span>,</span>
-<span id="cb26-496"><a href="#cb26-496" aria-hidden="true" tabindex="-1"></a>  height<span class="op">=</span><span class="dv">800</span></span>
-<span id="cb26-497"><a href="#cb26-497" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-498"><a href="#cb26-498" aria-hidden="true" tabindex="-1"></a>fig_cluster2.show()</span>
-<span id="cb26-499"><a href="#cb26-499" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-500"><a href="#cb26-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-501"><a href="#cb26-501" aria-hidden="true" tabindex="-1"></a><span class="fu"># Artist Collaboration Networks by Decade</span></span>
+<span id="cb26-482"><a href="#cb26-482" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sleeper Hits (Cluster 2)</span></span>
+<span id="cb26-483"><a href="#cb26-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-486"><a href="#cb26-486" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-487"><a href="#cb26-487" aria-hidden="true" tabindex="-1"></a>cluster_2_songs <span class="op">=</span> df[df[<span class="st">"Cluster"</span>] <span class="op">==</span> <span class="st">"2"</span>][[<span class="st">"Single Name"</span>, <span class="st">"Artist(s)"</span>, <span class="st">"Weeks in Top Ten"</span>, <span class="st">"Lag to Peak"</span>, <span class="st">"Peak"</span>]]</span>
+<span id="cb26-488"><a href="#cb26-488" aria-hidden="true" tabindex="-1"></a>cluster_2_songs_sorted <span class="op">=</span> cluster_2_songs.sort_values(by<span class="op">=</span>[<span class="st">"Peak"</span>, <span class="st">"Weeks in Top Ten"</span>], ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>])</span>
+<span id="cb26-489"><a href="#cb26-489" aria-hidden="true" tabindex="-1"></a>cluster_2_songs_sorted[<span class="st">'Label'</span>] <span class="op">=</span> cluster_2_songs_sorted[<span class="st">"Single Name"</span>] <span class="op">+</span> <span class="st">" – "</span> <span class="op">+</span> cluster_2_songs_sorted[<span class="st">"Artist(s)"</span>]</span>
+<span id="cb26-490"><a href="#cb26-490" aria-hidden="true" tabindex="-1"></a>fig_cluster2 <span class="op">=</span> px.bar(</span>
+<span id="cb26-491"><a href="#cb26-491" aria-hidden="true" tabindex="-1"></a>  cluster_2_songs_sorted,</span>
+<span id="cb26-492"><a href="#cb26-492" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-493"><a href="#cb26-493" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span><span class="st">"Label"</span>,</span>
+<span id="cb26-494"><a href="#cb26-494" aria-hidden="true" tabindex="-1"></a>  orientation<span class="op">=</span><span class="st">'h'</span>,</span>
+<span id="cb26-495"><a href="#cb26-495" aria-hidden="true" tabindex="-1"></a>  text<span class="op">=</span><span class="st">"Weeks in Top Ten"</span>,</span>
+<span id="cb26-496"><a href="#cb26-496" aria-hidden="true" tabindex="-1"></a>  hover_data<span class="op">=</span>[<span class="st">"Peak"</span>, <span class="st">"Lag to Peak"</span>],</span>
+<span id="cb26-497"><a href="#cb26-497" aria-hidden="true" tabindex="-1"></a>  title<span class="op">=</span><span class="st">"Sleeper Hits (Songs that Peaked Late but Stayed Long)"</span>,</span>
+<span id="cb26-498"><a href="#cb26-498" aria-hidden="true" tabindex="-1"></a>  height<span class="op">=</span><span class="dv">800</span></span>
+<span id="cb26-499"><a href="#cb26-499" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-500"><a href="#cb26-500" aria-hidden="true" tabindex="-1"></a>fig_cluster2.show()</span>
+<span id="cb26-501"><a href="#cb26-501" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-502"><a href="#cb26-502" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-503"><a href="#cb26-503" aria-hidden="true" tabindex="-1"></a>This section visualizes how artists collaborate within each decade, revealing the most central figures in the collaboration network for each era. For every decade, a network graph is constructed where nodes represent artists and edges indicate collaborations (including features and joint credits). The top 10 most connected artists (by degree centrality) are highlighted, and their collaboration networks are visualized using interactive network diagrams. This helps illustrate how collaboration patterns and key influencers have evolved across decades in popular music.</span>
+<span id="cb26-503"><a href="#cb26-503" aria-hidden="true" tabindex="-1"></a><span class="fu"># Artist Collaboration Networks by Decade</span></span>
 <span id="cb26-504"><a href="#cb26-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-507"><a href="#cb26-507" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb26-508"><a href="#cb26-508" aria-hidden="true" tabindex="-1"></a>frames <span class="op">=</span> []</span>
-<span id="cb26-509"><a href="#cb26-509" aria-hidden="true" tabindex="-1"></a>decade_list <span class="op">=</span> <span class="bu">sorted</span>(df[<span class="st">'Decade'</span>].dropna().unique())</span>
-<span id="cb26-510"><a href="#cb26-510" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> decade <span class="kw">in</span> decade_list:</span>
-<span id="cb26-511"><a href="#cb26-511" aria-hidden="true" tabindex="-1"></a>  group <span class="op">=</span> df[df[<span class="st">'Decade'</span>] <span class="op">==</span> decade]</span>
-<span id="cb26-512"><a href="#cb26-512" aria-hidden="true" tabindex="-1"></a>  G <span class="op">=</span> nx.Graph()</span>
-<span id="cb26-513"><a href="#cb26-513" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> artists <span class="kw">in</span> group[<span class="st">"Artist(s)"</span>].dropna():</span>
-<span id="cb26-514"><a href="#cb26-514" aria-hidden="true" tabindex="-1"></a>    cleaned <span class="op">=</span> re.sub(</span>
-<span id="cb26-515"><a href="#cb26-515" aria-hidden="true" tabindex="-1"></a>      <span class="vs">r'</span><span class="dv">\s</span><span class="op">*</span>(?:<span class="vs">&amp;</span><span class="cf">|</span><span class="dv">\b</span><span class="vs">feat</span><span class="ch">\.</span><span class="op">?</span><span class="dv">\b</span><span class="cf">|</span><span class="dv">\b</span><span class="vs">featuring</span><span class="dv">\b</span><span class="cf">|</span><span class="vs">,</span><span class="cf">|</span><span class="dv">\b</span><span class="vs">and</span><span class="dv">\b</span><span class="cf">|</span><span class="ch">\&amp;</span>)<span class="dv">\s</span><span class="op">*</span><span class="vs">'</span>,</span>
-<span id="cb26-516"><a href="#cb26-516" aria-hidden="true" tabindex="-1"></a>      <span class="st">','</span>,</span>
-<span id="cb26-517"><a href="#cb26-517" aria-hidden="true" tabindex="-1"></a>      <span class="bu">str</span>(artists),</span>
-<span id="cb26-518"><a href="#cb26-518" aria-hidden="true" tabindex="-1"></a>      flags<span class="op">=</span>re.IGNORECASE</span>
-<span id="cb26-519"><a href="#cb26-519" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb26-520"><a href="#cb26-520" aria-hidden="true" tabindex="-1"></a>    names <span class="op">=</span> [a.strip() <span class="cf">for</span> a <span class="kw">in</span> cleaned.split(<span class="st">','</span>) <span class="cf">if</span> a.strip()]</span>
-<span id="cb26-521"><a href="#cb26-521" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(names)):</span>
-<span id="cb26-522"><a href="#cb26-522" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="bu">len</span>(names)):</span>
-<span id="cb26-523"><a href="#cb26-523" aria-hidden="true" tabindex="-1"></a>        G.add_edge(names[i], names[j])</span>
-<span id="cb26-524"><a href="#cb26-524" aria-hidden="true" tabindex="-1"></a>  deg <span class="op">=</span> nx.degree_centrality(G)</span>
-<span id="cb26-525"><a href="#cb26-525" aria-hidden="true" tabindex="-1"></a>  top_artists <span class="op">=</span> <span class="bu">sorted</span>(deg.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)[:<span class="dv">10</span>]</span>
-<span id="cb26-526"><a href="#cb26-526" aria-hidden="true" tabindex="-1"></a>  subG <span class="op">=</span> G.subgraph(<span class="bu">dict</span>(top_artists).keys())</span>
-<span id="cb26-527"><a href="#cb26-527" aria-hidden="true" tabindex="-1"></a>  pos <span class="op">=</span> nx.spring_layout(subG, seed<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb26-528"><a href="#cb26-528" aria-hidden="true" tabindex="-1"></a>  edge_x, edge_y <span class="op">=</span> [], []</span>
-<span id="cb26-529"><a href="#cb26-529" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> edge <span class="kw">in</span> subG.edges():</span>
-<span id="cb26-530"><a href="#cb26-530" aria-hidden="true" tabindex="-1"></a>    x0, y0 <span class="op">=</span> pos[edge[<span class="dv">0</span>]]</span>
-<span id="cb26-531"><a href="#cb26-531" aria-hidden="true" tabindex="-1"></a>    x1, y1 <span class="op">=</span> pos[edge[<span class="dv">1</span>]]</span>
-<span id="cb26-532"><a href="#cb26-532" aria-hidden="true" tabindex="-1"></a>    edge_x <span class="op">+=</span> [x0, x1, <span class="va">None</span>]</span>
-<span id="cb26-533"><a href="#cb26-533" aria-hidden="true" tabindex="-1"></a>    edge_y <span class="op">+=</span> [y0, y1, <span class="va">None</span>]</span>
-<span id="cb26-534"><a href="#cb26-534" aria-hidden="true" tabindex="-1"></a>  edge_trace <span class="op">=</span> go.Scatter(</span>
-<span id="cb26-535"><a href="#cb26-535" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>edge_x, y<span class="op">=</span>edge_y,</span>
-<span id="cb26-536"><a href="#cb26-536" aria-hidden="true" tabindex="-1"></a>    line<span class="op">=</span><span class="bu">dict</span>(width<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'#888'</span>),</span>
-<span id="cb26-537"><a href="#cb26-537" aria-hidden="true" tabindex="-1"></a>    hoverinfo<span class="op">=</span><span class="st">'none'</span>,</span>
-<span id="cb26-538"><a href="#cb26-538" aria-hidden="true" tabindex="-1"></a>    mode<span class="op">=</span><span class="st">'lines'</span></span>
-<span id="cb26-539"><a href="#cb26-539" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb26-540"><a href="#cb26-540" aria-hidden="true" tabindex="-1"></a>  node_x, node_y, node_text, node_size <span class="op">=</span> [], [], [], []</span>
-<span id="cb26-541"><a href="#cb26-541" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> node <span class="kw">in</span> subG.nodes():</span>
-<span id="cb26-542"><a href="#cb26-542" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> pos[node]</span>
-<span id="cb26-543"><a href="#cb26-543" aria-hidden="true" tabindex="-1"></a>    node_x.append(x)</span>
-<span id="cb26-544"><a href="#cb26-544" aria-hidden="true" tabindex="-1"></a>    node_y.append(y)</span>
-<span id="cb26-545"><a href="#cb26-545" aria-hidden="true" tabindex="-1"></a>    node_text.append(node)</span>
-<span id="cb26-546"><a href="#cb26-546" aria-hidden="true" tabindex="-1"></a>    node_size.append(deg[node]<span class="op">*</span><span class="dv">2000</span>)</span>
-<span id="cb26-547"><a href="#cb26-547" aria-hidden="true" tabindex="-1"></a>  node_trace <span class="op">=</span> go.Scatter(</span>
-<span id="cb26-548"><a href="#cb26-548" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>node_x, y<span class="op">=</span>node_y,</span>
-<span id="cb26-549"><a href="#cb26-549" aria-hidden="true" tabindex="-1"></a>    mode<span class="op">=</span><span class="st">'markers+text'</span>,</span>
-<span id="cb26-550"><a href="#cb26-550" aria-hidden="true" tabindex="-1"></a>    hovertext<span class="op">=</span>node_text,</span>
-<span id="cb26-551"><a href="#cb26-551" aria-hidden="true" tabindex="-1"></a>    text<span class="op">=</span>node_text,</span>
-<span id="cb26-552"><a href="#cb26-552" aria-hidden="true" tabindex="-1"></a>    textposition<span class="op">=</span><span class="st">'top center'</span>,</span>
-<span id="cb26-553"><a href="#cb26-553" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="bu">dict</span>(size<span class="op">=</span>node_size, color<span class="op">=</span><span class="st">'lightblue'</span>),</span>
-<span id="cb26-554"><a href="#cb26-554" aria-hidden="true" tabindex="-1"></a>    showlegend<span class="op">=</span><span class="va">False</span></span>
-<span id="cb26-555"><a href="#cb26-555" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb26-556"><a href="#cb26-556" aria-hidden="true" tabindex="-1"></a>  frames.append(go.Frame(data<span class="op">=</span>[edge_trace, node_trace], name<span class="op">=</span><span class="bu">str</span>(decade)))</span>
-<span id="cb26-557"><a href="#cb26-557" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial figure</span></span>
-<span id="cb26-558"><a href="#cb26-558" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> go.Figure(</span>
-<span id="cb26-559"><a href="#cb26-559" aria-hidden="true" tabindex="-1"></a>  data<span class="op">=</span>frames[<span class="dv">0</span>].data,</span>
-<span id="cb26-560"><a href="#cb26-560" aria-hidden="true" tabindex="-1"></a>  layout<span class="op">=</span>go.Layout(</span>
-<span id="cb26-561"><a href="#cb26-561" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Top Artist Collaboration Network by Decade"</span>,</span>
-<span id="cb26-562"><a href="#cb26-562" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb26-563"><a href="#cb26-563" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb26-564"><a href="#cb26-564" aria-hidden="true" tabindex="-1"></a>    xaxis<span class="op">=</span><span class="bu">dict</span>(showgrid<span class="op">=</span><span class="va">False</span>, zeroline<span class="op">=</span><span class="va">False</span>, showticklabels<span class="op">=</span><span class="va">False</span>),</span>
-<span id="cb26-565"><a href="#cb26-565" aria-hidden="true" tabindex="-1"></a>    yaxis<span class="op">=</span><span class="bu">dict</span>(showgrid<span class="op">=</span><span class="va">False</span>, zeroline<span class="op">=</span><span class="va">False</span>, showticklabels<span class="op">=</span><span class="va">False</span>),</span>
-<span id="cb26-566"><a href="#cb26-566" aria-hidden="true" tabindex="-1"></a>    showlegend<span class="op">=</span><span class="va">False</span></span>
-<span id="cb26-567"><a href="#cb26-567" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb26-568"><a href="#cb26-568" aria-hidden="true" tabindex="-1"></a>  frames<span class="op">=</span>frames</span>
-<span id="cb26-569"><a href="#cb26-569" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-570"><a href="#cb26-570" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb26-571"><a href="#cb26-571" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb26-572"><a href="#cb26-572" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-573"><a href="#cb26-573" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb26-505"><a href="#cb26-505" aria-hidden="true" tabindex="-1"></a>This section visualizes how artists collaborate within each decade, revealing the most central figures in the collaboration network for each era. For every decade, a network graph is constructed where nodes represent artists and edges indicate collaborations (including features and joint credits). The top 10 most connected artists (by degree centrality) are highlighted, and their collaboration networks are visualized using interactive network diagrams. This helps illustrate how collaboration patterns and key influencers have evolved across decades in popular music.</span>
+<span id="cb26-506"><a href="#cb26-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-509"><a href="#cb26-509" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-510"><a href="#cb26-510" aria-hidden="true" tabindex="-1"></a>frames <span class="op">=</span> []</span>
+<span id="cb26-511"><a href="#cb26-511" aria-hidden="true" tabindex="-1"></a>decade_list <span class="op">=</span> <span class="bu">sorted</span>(df[<span class="st">'Decade'</span>].dropna().unique())</span>
+<span id="cb26-512"><a href="#cb26-512" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> decade <span class="kw">in</span> decade_list:</span>
+<span id="cb26-513"><a href="#cb26-513" aria-hidden="true" tabindex="-1"></a>  group <span class="op">=</span> df[df[<span class="st">'Decade'</span>] <span class="op">==</span> decade]</span>
+<span id="cb26-514"><a href="#cb26-514" aria-hidden="true" tabindex="-1"></a>  G <span class="op">=</span> nx.Graph()</span>
+<span id="cb26-515"><a href="#cb26-515" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> artists <span class="kw">in</span> group[<span class="st">"Artist(s)"</span>].dropna():</span>
+<span id="cb26-516"><a href="#cb26-516" aria-hidden="true" tabindex="-1"></a>    cleaned <span class="op">=</span> re.sub(</span>
+<span id="cb26-517"><a href="#cb26-517" aria-hidden="true" tabindex="-1"></a>      <span class="vs">r'</span><span class="dv">\s</span><span class="op">*</span>(?:<span class="vs">&amp;</span><span class="cf">|</span><span class="dv">\b</span><span class="vs">feat</span><span class="ch">\.</span><span class="op">?</span><span class="dv">\b</span><span class="cf">|</span><span class="dv">\b</span><span class="vs">featuring</span><span class="dv">\b</span><span class="cf">|</span><span class="vs">,</span><span class="cf">|</span><span class="dv">\b</span><span class="vs">and</span><span class="dv">\b</span><span class="cf">|</span><span class="ch">\&amp;</span>)<span class="dv">\s</span><span class="op">*</span><span class="vs">'</span>,</span>
+<span id="cb26-518"><a href="#cb26-518" aria-hidden="true" tabindex="-1"></a>      <span class="st">','</span>,</span>
+<span id="cb26-519"><a href="#cb26-519" aria-hidden="true" tabindex="-1"></a>      <span class="bu">str</span>(artists),</span>
+<span id="cb26-520"><a href="#cb26-520" aria-hidden="true" tabindex="-1"></a>      flags<span class="op">=</span>re.IGNORECASE</span>
+<span id="cb26-521"><a href="#cb26-521" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-522"><a href="#cb26-522" aria-hidden="true" tabindex="-1"></a>    names <span class="op">=</span> [a.strip() <span class="cf">for</span> a <span class="kw">in</span> cleaned.split(<span class="st">','</span>) <span class="cf">if</span> a.strip()]</span>
+<span id="cb26-523"><a href="#cb26-523" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(names)):</span>
+<span id="cb26-524"><a href="#cb26-524" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="bu">len</span>(names)):</span>
+<span id="cb26-525"><a href="#cb26-525" aria-hidden="true" tabindex="-1"></a>        G.add_edge(names[i], names[j])</span>
+<span id="cb26-526"><a href="#cb26-526" aria-hidden="true" tabindex="-1"></a>  deg <span class="op">=</span> nx.degree_centrality(G)</span>
+<span id="cb26-527"><a href="#cb26-527" aria-hidden="true" tabindex="-1"></a>  top_artists <span class="op">=</span> <span class="bu">sorted</span>(deg.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)[:<span class="dv">10</span>]</span>
+<span id="cb26-528"><a href="#cb26-528" aria-hidden="true" tabindex="-1"></a>  subG <span class="op">=</span> G.subgraph(<span class="bu">dict</span>(top_artists).keys())</span>
+<span id="cb26-529"><a href="#cb26-529" aria-hidden="true" tabindex="-1"></a>  pos <span class="op">=</span> nx.spring_layout(subG, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb26-530"><a href="#cb26-530" aria-hidden="true" tabindex="-1"></a>  edge_x, edge_y <span class="op">=</span> [], []</span>
+<span id="cb26-531"><a href="#cb26-531" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> edge <span class="kw">in</span> subG.edges():</span>
+<span id="cb26-532"><a href="#cb26-532" aria-hidden="true" tabindex="-1"></a>    x0, y0 <span class="op">=</span> pos[edge[<span class="dv">0</span>]]</span>
+<span id="cb26-533"><a href="#cb26-533" aria-hidden="true" tabindex="-1"></a>    x1, y1 <span class="op">=</span> pos[edge[<span class="dv">1</span>]]</span>
+<span id="cb26-534"><a href="#cb26-534" aria-hidden="true" tabindex="-1"></a>    edge_x <span class="op">+=</span> [x0, x1, <span class="va">None</span>]</span>
+<span id="cb26-535"><a href="#cb26-535" aria-hidden="true" tabindex="-1"></a>    edge_y <span class="op">+=</span> [y0, y1, <span class="va">None</span>]</span>
+<span id="cb26-536"><a href="#cb26-536" aria-hidden="true" tabindex="-1"></a>  edge_trace <span class="op">=</span> go.Scatter(</span>
+<span id="cb26-537"><a href="#cb26-537" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>edge_x, y<span class="op">=</span>edge_y,</span>
+<span id="cb26-538"><a href="#cb26-538" aria-hidden="true" tabindex="-1"></a>    line<span class="op">=</span><span class="bu">dict</span>(width<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'#888'</span>),</span>
+<span id="cb26-539"><a href="#cb26-539" aria-hidden="true" tabindex="-1"></a>    hoverinfo<span class="op">=</span><span class="st">'none'</span>,</span>
+<span id="cb26-540"><a href="#cb26-540" aria-hidden="true" tabindex="-1"></a>    mode<span class="op">=</span><span class="st">'lines'</span></span>
+<span id="cb26-541"><a href="#cb26-541" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb26-542"><a href="#cb26-542" aria-hidden="true" tabindex="-1"></a>  node_x, node_y, node_text, node_size <span class="op">=</span> [], [], [], []</span>
+<span id="cb26-543"><a href="#cb26-543" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> node <span class="kw">in</span> subG.nodes():</span>
+<span id="cb26-544"><a href="#cb26-544" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> pos[node]</span>
+<span id="cb26-545"><a href="#cb26-545" aria-hidden="true" tabindex="-1"></a>    node_x.append(x)</span>
+<span id="cb26-546"><a href="#cb26-546" aria-hidden="true" tabindex="-1"></a>    node_y.append(y)</span>
+<span id="cb26-547"><a href="#cb26-547" aria-hidden="true" tabindex="-1"></a>    node_text.append(node)</span>
+<span id="cb26-548"><a href="#cb26-548" aria-hidden="true" tabindex="-1"></a>    node_size.append(deg[node]<span class="op">*</span><span class="dv">2000</span>)</span>
+<span id="cb26-549"><a href="#cb26-549" aria-hidden="true" tabindex="-1"></a>  node_trace <span class="op">=</span> go.Scatter(</span>
+<span id="cb26-550"><a href="#cb26-550" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>node_x, y<span class="op">=</span>node_y,</span>
+<span id="cb26-551"><a href="#cb26-551" aria-hidden="true" tabindex="-1"></a>    mode<span class="op">=</span><span class="st">'markers+text'</span>,</span>
+<span id="cb26-552"><a href="#cb26-552" aria-hidden="true" tabindex="-1"></a>    hovertext<span class="op">=</span>node_text,</span>
+<span id="cb26-553"><a href="#cb26-553" aria-hidden="true" tabindex="-1"></a>    text<span class="op">=</span>node_text,</span>
+<span id="cb26-554"><a href="#cb26-554" aria-hidden="true" tabindex="-1"></a>    textposition<span class="op">=</span><span class="st">'top center'</span>,</span>
+<span id="cb26-555"><a href="#cb26-555" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="bu">dict</span>(size<span class="op">=</span>node_size, color<span class="op">=</span><span class="st">'lightblue'</span>),</span>
+<span id="cb26-556"><a href="#cb26-556" aria-hidden="true" tabindex="-1"></a>    showlegend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb26-557"><a href="#cb26-557" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb26-558"><a href="#cb26-558" aria-hidden="true" tabindex="-1"></a>  frames.append(go.Frame(data<span class="op">=</span>[edge_trace, node_trace], name<span class="op">=</span><span class="bu">str</span>(decade)))</span>
+<span id="cb26-559"><a href="#cb26-559" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial figure</span></span>
+<span id="cb26-560"><a href="#cb26-560" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> go.Figure(</span>
+<span id="cb26-561"><a href="#cb26-561" aria-hidden="true" tabindex="-1"></a>  data<span class="op">=</span>frames[<span class="dv">0</span>].data,</span>
+<span id="cb26-562"><a href="#cb26-562" aria-hidden="true" tabindex="-1"></a>  layout<span class="op">=</span>go.Layout(</span>
+<span id="cb26-563"><a href="#cb26-563" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Top Artist Collaboration Network by Decade"</span>,</span>
+<span id="cb26-564"><a href="#cb26-564" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="cb26-565"><a href="#cb26-565" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="cb26-566"><a href="#cb26-566" aria-hidden="true" tabindex="-1"></a>    xaxis<span class="op">=</span><span class="bu">dict</span>(showgrid<span class="op">=</span><span class="va">False</span>, zeroline<span class="op">=</span><span class="va">False</span>, showticklabels<span class="op">=</span><span class="va">False</span>),</span>
+<span id="cb26-567"><a href="#cb26-567" aria-hidden="true" tabindex="-1"></a>    yaxis<span class="op">=</span><span class="bu">dict</span>(showgrid<span class="op">=</span><span class="va">False</span>, zeroline<span class="op">=</span><span class="va">False</span>, showticklabels<span class="op">=</span><span class="va">False</span>),</span>
+<span id="cb26-568"><a href="#cb26-568" aria-hidden="true" tabindex="-1"></a>    showlegend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb26-569"><a href="#cb26-569" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb26-570"><a href="#cb26-570" aria-hidden="true" tabindex="-1"></a>  frames<span class="op">=</span>frames</span>
+<span id="cb26-571"><a href="#cb26-571" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-572"><a href="#cb26-572" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb26-573"><a href="#cb26-573" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-574"><a href="#cb26-574" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-575"><a href="#cb26-575" aria-hidden="true" tabindex="-1"></a>This analysis provides a comprehensive overview of trends in the Billboard Top Ten, including song longevity, peak positions, artist performance, and collaboration networks. Further exploration could include genre-based analysis, deeper clustering, tests for statistical significance, or predictive modeling.</span>
+<span id="cb26-575"><a href="#cb26-575" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
 <span id="cb26-576"><a href="#cb26-576" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-577"><a href="#cb26-577" aria-hidden="true" tabindex="-1"></a>jupyter: python3</span>
-<span id="cb26-578"><a href="#cb26-578" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb26-577"><a href="#cb26-577" aria-hidden="true" tabindex="-1"></a>This analysis provides a comprehensive overview of trends in the Billboard Top Ten, including song longevity, peak positions, artist performance, and collaboration networks. Further exploration could include genre-based analysis, deeper clustering, tests for statistical significance, or predictive modeling.</span>
+<span id="cb26-578"><a href="#cb26-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-579"><a href="#cb26-579" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/music.gif)</span></span>
+<span id="cb26-580"><a href="#cb26-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-581"><a href="#cb26-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-582"><a href="#cb26-582" aria-hidden="true" tabindex="-1"></a>---</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
